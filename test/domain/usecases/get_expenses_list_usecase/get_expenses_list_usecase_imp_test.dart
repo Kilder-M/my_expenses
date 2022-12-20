@@ -1,0 +1,41 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:my_expenses/app/domain/entities/expense_entity.dart';
+import 'package:my_expenses/app/domain/usecases/get_expenses_list_usecase/get_expenses_list_usecase_imp.dart';
+
+class MockGetExpensesListUsecaseImp extends Mock
+    implements GetExpensesListUsecaseImp {}
+
+void main() {
+  final getExpensesListUsecaseImp = MockGetExpensesListUsecaseImp();
+  group('Testing get expenses list use case implement:', () {
+    final expensesList = [
+      ExpenseEntity(
+        id: 1,
+        name: 'Agua',
+        paymentType: 'DEB',
+        status: 'Em aberto',
+        value: 90.0,
+        plannedExpensesId: 1,
+      ),
+      ExpenseEntity(
+        id: 2,
+        name: 'Luz',
+        paymentType: 'DEB',
+        status: 'Pago',
+        value: 190.0,
+        plannedExpensesId: 1,
+      ),
+    ];
+
+    test('Should return a expenses list', () async {
+      when(
+        () => getExpensesListUsecaseImp(),
+      ).thenAnswer((invocation) async => expensesList);
+
+      final response = await getExpensesListUsecaseImp();
+
+      expect(response, isA<List<ExpenseEntity>>());
+    });
+  });
+}
