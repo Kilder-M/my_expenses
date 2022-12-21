@@ -3,10 +3,10 @@ import 'package:my_expenses/app/data/data_sources/get_expenses_list_data_source.
 import 'package:my_expenses/app/data/dtos/expense_dto.dart';
 import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 
-class GetExpensesListLocalDataSource implements GetExpensesListDataSource {
+class GetExpensesListLocalDataSourceImp implements GetExpensesListDataSource {
   final GetDataBaseImp _getDataBaseImp;
 
-  GetExpensesListLocalDataSource(this._getDataBaseImp);
+  GetExpensesListLocalDataSourceImp(this._getDataBaseImp);
   @override
   Future<List<ExpenseEntity>> call() async {
     final databaseResponse = await _getDataBaseImp.call();

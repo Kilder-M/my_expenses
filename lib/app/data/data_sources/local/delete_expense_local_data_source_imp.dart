@@ -2,10 +2,10 @@ import 'package:my_expenses/app/core/data/services/databases/sqflite/get_data_ba
 import 'package:my_expenses/app/data/data_sources/delete_expense_data_source.dart';
 import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 
-class DeleteExpenseLocalDataSource implements DeleteExpenseDataSource{
+class DeleteExpenseLocalDataSourceImp implements DeleteExpenseDataSource{
     final GetDataBaseImp _getDataBaseImp;
 
-  DeleteExpenseLocalDataSource(this._getDataBaseImp);
+  DeleteExpenseLocalDataSourceImp(this._getDataBaseImp);
   @override
   Future<bool> call(ExpenseEntity expenseEntity ) async{
     final databaseResponse = await _getDataBaseImp();

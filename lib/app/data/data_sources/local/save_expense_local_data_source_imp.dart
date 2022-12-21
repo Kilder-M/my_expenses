@@ -2,10 +2,10 @@ import 'package:my_expenses/app/core/data/services/databases/sqflite/get_data_ba
 import 'package:my_expenses/app/data/data_sources/save_expense_data_source.dart';
 import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 
-class SaveExpanseLocalDataSource implements SaveExpenseDataSource {
+class SaveExpanseLocalDataSourceImp implements SaveExpenseDataSource {
   final GetDataBaseImp _getDataBaseImp;
 
-  SaveExpanseLocalDataSource(this._getDataBaseImp);
+  SaveExpanseLocalDataSourceImp(this._getDataBaseImp);
 
   @override
   Future<bool> call(ExpenseEntity expenseEntity) async {
