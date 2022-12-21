@@ -1,11 +1,13 @@
+import 'package:my_expenses/app/data/data_sources/local/delete_expense_local_data_source.dart';
 import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 import 'package:my_expenses/app/domain/repositories/delete_expense_repository.dart';
 
 class DeleteExpenseRepositoryImp extends DeleteExpenseRepository{
-  @override
-  Future<bool> call(ExpenseEntity expenseEntity) {
-    // TODO: implement call
-    throw UnimplementedError();
-  }
+  final DeleteExpenseLocalDataSource _deleteExpenseLocalDataSource;
 
+  DeleteExpenseRepositoryImp(this._deleteExpenseLocalDataSource);
+  @override
+  Future<bool> call(ExpenseEntity expenseEntity) async{
+    return await _deleteExpenseLocalDataSource(expenseEntity);
+  }
 }
