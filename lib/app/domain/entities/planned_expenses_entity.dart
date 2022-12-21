@@ -12,7 +12,7 @@ class PlannedExpensesEntity {
     required this.id,
     required this.expensesEntityList,
     required this.month,
-    this.amount,
+    this.amount = 0,
     required this.wage,
     this.remainder,
   });
