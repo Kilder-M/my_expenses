@@ -2,7 +2,7 @@ import 'package:my_expenses/app/data/data_sources/save_planned_expenses_data_sou
 import 'package:my_expenses/app/domain/entities/planned_expenses_entity.dart';
 import 'package:my_expenses/app/domain/repositories/save_planned_expenses_repository.dart';
 
-class SavePlannedExpensesRepositoryImp extends SavePlannedExpensesRepository{
+class SavePlannedExpensesRepositoryImp implements SavePlannedExpensesRepository{
   final SavePlannedExpensesDataSource _savePlannedExpenseLocalDataSource;
 
   SavePlannedExpensesRepositoryImp(this._savePlannedExpenseLocalDataSource);
