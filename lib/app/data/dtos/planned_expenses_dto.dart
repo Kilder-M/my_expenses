@@ -7,7 +7,7 @@ class PlannedExpensesDTO extends PlannedExpensesEntity {
     double? amount,
     double? remainder,
     required List<ExpenseEntity> expensesEntityList,
-    required DateTime month,
+    required String month,
     required double wage,
   }) : super(
           id: id,

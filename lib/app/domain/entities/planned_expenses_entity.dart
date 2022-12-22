@@ -3,7 +3,7 @@ import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 class PlannedExpensesEntity {
   int? id;
   List<ExpenseEntity> expensesEntityList;
-  DateTime month;
+  String month;
   double? amount;
   double wage;
   double? remainder;
