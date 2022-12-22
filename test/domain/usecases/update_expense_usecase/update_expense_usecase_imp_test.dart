@@ -3,7 +3,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 import 'package:my_expenses/app/domain/usecases/save_expense_usecase/save_expense_usecase_imp.dart';
 
-class MockUpdateExpenseUsecaseImp extends Mock implements UpdateExpenseUsecaseImp {}
+class MockUpdateExpenseUsecaseImp extends Mock implements SaveExpenseUsecaseImp {}
 
 void main() {
   final mockUpdateExpenseUsecaseImp = MockUpdateExpenseUsecaseImp();

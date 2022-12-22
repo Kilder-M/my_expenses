@@ -7,7 +7,7 @@ class SavePlannedExpensesUseCaseImp implements SavePlannedExpensesUseCase {
 
   SavePlannedExpensesUseCaseImp(this._savePlannedExpensesRepository);
   @override
-  Future<bool> save(PlannedExpensesEntity plannedExpensesEntity) async {
+  Future<bool> call(PlannedExpensesEntity plannedExpensesEntity) async {
     return await _savePlannedExpensesRepository.save(plannedExpensesEntity);
   }
 }
