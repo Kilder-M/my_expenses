@@ -1,9 +1,9 @@
-import 'package:my_expenses/app/core/data/services/databases/sqflite/get_data_base_imp.dart';
+import 'package:my_expenses/app/core/data/services/databases/sqflite/get_data_base_sqlite_imp.dart';
 import 'package:my_expenses/app/data/data_sources/save_expense_data_source.dart';
 import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 
 class SaveExpanseLocalDataSourceImp implements SaveExpenseDataSource {
-  final GetDataBaseImp _getDataBaseImp;
+  final GetDataBaseSQLiteImp _getDataBaseImp;
 
   SaveExpanseLocalDataSourceImp(this._getDataBaseImp);
 

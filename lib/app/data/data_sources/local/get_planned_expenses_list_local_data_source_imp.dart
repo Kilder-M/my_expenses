@@ -1,10 +1,10 @@
-import 'package:my_expenses/app/core/data/services/databases/sqflite/get_data_base_imp.dart';
+import 'package:my_expenses/app/core/data/services/databases/sqflite/get_data_base_sqlite_imp.dart';
 import 'package:my_expenses/app/data/data_sources/get_planned_expenses_list_data_source.dart';
 import 'package:my_expenses/app/data/dtos/planned_expenses_dto.dart';
 import 'package:my_expenses/app/domain/entities/planned_expenses_entity.dart';
 
 class GetPlannedExpensesListLocalDataSourceImp implements GetPlannedExpensesListDataSource{
-  final GetDataBaseImp _getDataBaseImp;
+  final GetDataBaseSQLiteImp _getDataBaseImp;
 
   GetPlannedExpensesListLocalDataSourceImp(this._getDataBaseImp);
   @override

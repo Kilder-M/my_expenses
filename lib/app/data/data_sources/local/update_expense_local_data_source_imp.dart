@@ -1,9 +1,9 @@
-import 'package:my_expenses/app/core/data/services/databases/sqflite/get_data_base_imp.dart';
+import 'package:my_expenses/app/core/data/services/databases/sqflite/get_data_base_sqlite_imp.dart';
 import 'package:my_expenses/app/data/data_sources/update_expense_data_source.dart';
 import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 
 class UpdateExpenseLocalDataSourceImp implements UpdateExpenseDataSource {
-  final GetDataBaseImp _getDataBaseImp;
+  final GetDataBaseSQLiteImp _getDataBaseImp;
 
   UpdateExpenseLocalDataSourceImp(this._getDataBaseImp);
   @override
