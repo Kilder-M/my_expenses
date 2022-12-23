@@ -3,12 +3,12 @@ import 'package:my_expenses/app/domain/entities/planned_expenses_entity.dart';
 import 'package:my_expenses/app/domain/repositories/save_planned_expenses_repository.dart';
 
 class SavePlannedExpensesRepositoryImp implements SavePlannedExpensesRepository{
-  final SavePlannedExpensesDataSource _savePlannedExpenseLocalDataSource;
+  final SavePlannedExpensesDataSource _savePlannedExpenseDataSource;
 
-  SavePlannedExpensesRepositoryImp(this._savePlannedExpenseLocalDataSource);
+  SavePlannedExpensesRepositoryImp(this._savePlannedExpenseDataSource);
   @override
   Future<bool> save(PlannedExpensesEntity plannedExpensesEntity) async {
-    return await _savePlannedExpenseLocalDataSource(plannedExpensesEntity);
+    return await _savePlannedExpenseDataSource(plannedExpensesEntity);
   }
 
 }
