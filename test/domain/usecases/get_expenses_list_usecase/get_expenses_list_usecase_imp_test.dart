@@ -4,7 +4,7 @@ import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 import 'package:my_expenses/app/domain/usecases/get_expenses_list_usecase/get_expenses_list_usecase_imp.dart';
 
 class MockGetExpensesListUsecaseImp extends Mock
-    implements GetExpensesListUsecaseImp {}
+    implements GetExpensesListByIdUsecaseImp {}
 
 void main() {
   final getExpensesListUsecaseImp = MockGetExpensesListUsecaseImp();
@@ -30,10 +30,10 @@ void main() {
 
     test('Should return a expenses list', () async {
       when(
-        () => getExpensesListUsecaseImp(),
+        () => getExpensesListUsecaseImp(1),
       ).thenAnswer((invocation) async => expensesList);
 
-      final response = await getExpensesListUsecaseImp();
+      final response = await getExpensesListUsecaseImp(1);
 
       expect(response, isA<List<ExpenseEntity>>());
     });
