@@ -6,7 +6,7 @@ class PlannedExpensesDTO extends PlannedExpensesEntity {
     int? id,
     double? amount,
     double? remainder,
-    required List<ExpenseEntity> expensesEntityList,
+    List<ExpenseEntity> expensesEntityList = const [],
     required String month,
     required double wage,
   }) : super(
@@ -24,7 +24,7 @@ class PlannedExpensesDTO extends PlannedExpensesEntity {
         remainder: json['remainder'],
         month: json['month'],
         wage: json['wage'],
-        expensesEntityList: [],
+        // expensesEntityList: [ExpenseDTO.fromMapLocalDatabase(json)]
       );
 
   Map<String, dynamic> toMapLocalDatabase() => {
