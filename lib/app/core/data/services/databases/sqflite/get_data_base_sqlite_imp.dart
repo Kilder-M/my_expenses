@@ -8,7 +8,7 @@ class GetDataBaseSQLiteImp implements GetDataBase {
   @override
   Future<Database> call() async {
     String path = join(await getDatabasesPath(), 'my_expenses');
-    deleteDatabase(path);
+    // deleteDatabase(path);
     final db = await openDatabase(path, version: 1, onCreate: (db, v) {
       db.execute(createPlannedExpensesTable);
       db.execute(createExpenseTable);

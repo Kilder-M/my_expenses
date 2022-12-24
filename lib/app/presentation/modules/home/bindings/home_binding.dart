@@ -50,8 +50,8 @@ class HomeBinding extends Bindings {
     Get.lazyPut<GetDataBaseSQLiteImp>(() => GetDataBaseSQLiteImp());
 
     //datasources
-    Get.lazyPut<GetExpensesListDataSource>(
-      () => GetExpensesListLocalDataSourceImp(Get.find()),
+    Get.lazyPut<GetExpensesListByIdDataSource>(
+      () => GetExpensesListByIdLocalDataSourceImp(Get.find()),
     );
     Get.lazyPut<GetPlannedExpensesListDataSource>(
       () => GetPlannedExpensesListLocalDataSourceImp(Get.find()),
@@ -70,8 +70,8 @@ class HomeBinding extends Bindings {
     );
 
     //repositories
-    Get.lazyPut<GetExpensesListRepository>(
-      () => GetExpensesListRepositoryImp(Get.find()),
+    Get.lazyPut<GetExpensesListByIdRepository>(
+      () => GetExpensesListRepositoryByIdImp(Get.find()),
     );
     Get.lazyPut<GetPlannedExpensesListRepository>(
       () => GetPlannedExpensesListRepositoryImp(Get.find()),
@@ -90,8 +90,8 @@ class HomeBinding extends Bindings {
     );
 
     //usecases
-    Get.lazyPut<GetExpensesListUsecase>(
-      () => GetExpensesListUsecaseImp(Get.find()),
+    Get.lazyPut<GetExpensesListByIdUsecase>(
+      () => GetExpensesListByIdUsecaseImp(Get.find()),
     );
     Get.lazyPut<GetPlannedExpensesListUsecase>(
       () => GetPlannedExpensesListUsecaseImp(Get.find()),
