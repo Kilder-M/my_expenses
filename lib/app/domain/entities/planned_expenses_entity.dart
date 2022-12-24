@@ -9,8 +9,8 @@ class PlannedExpensesEntity {
   double? remainder;
 
   PlannedExpensesEntity({
-    required this.id,
-    required this.expensesEntityList,
+    this.id,
+    this.expensesEntityList = const [],
     required this.month,
     this.amount = 0,
     required this.wage,
