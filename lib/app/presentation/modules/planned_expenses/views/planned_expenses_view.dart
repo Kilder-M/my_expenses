@@ -36,7 +36,7 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
                   itemBuilder: ((context, index) {
                     var plannedExpense = controller.plannedExpenseList[index];
                     return PlannedExpensesCardWidget(
-                        title: plannedExpense.month);
+                        title: plannedExpense.month.toString());
                   }),
                 ),
               );

@@ -31,7 +31,7 @@ void main() {
     PlannedExpensesEntity plannedExpensesEntity = PlannedExpensesEntity(
       id: 1,
       expensesEntityList: expensesList,
-      month: DateTime(2022, 12).toString(),
+      month: DateTime(2022, 12),
       amount: 0.0,
       wage: 1200.0,
       remainder: 0.0,
