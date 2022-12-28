@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_expenses/app/presentation/widgets/grid_view_card.dart';
+import 'package:my_expenses/app/presentation/widgets/grid_view_card_widget.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -14,7 +14,7 @@ class HomeView extends GetView<HomeController> {
       body: SafeArea(
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,14 +36,17 @@ class HomeView extends GetView<HomeController> {
           icon: Icon(Icons.home),
           label: 'Home',
         ),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Perfil',
+        ),
       ],
     );
   }
 
   Widget toolsSubtitle() {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: Text(
         'Ferramentas',
         style: TextStyle(
@@ -73,9 +76,11 @@ class HomeView extends GetView<HomeController> {
   }
 
   List<Widget> gridViewCardList() {
-    return  [
+    return [
       GestureDetector(
-        onTap: (){},
+        onTap: () {
+          Get.toNamed('planned-expenses');
+        },
         child: const GridViewCard(
           icon: Icons.calendar_month_outlined,
           cardName: 'Gastos Mensais',
