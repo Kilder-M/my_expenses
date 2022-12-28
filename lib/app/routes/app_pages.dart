@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 
-import '../modules/planned_expenses/bindings/planned_expenses_binding.dart';
-import '../modules/planned_expenses/views/planned_expenses_view.dart';
 import '../presentation/modules/home/bindings/home_binding.dart';
 import '../presentation/modules/home/views/home_view.dart';
+import '../presentation/modules/planned_expenses/bindings/planned_expenses_binding.dart';
+import '../presentation/modules/planned_expenses/views/planned_expenses_view.dart';
 
 part 'app_routes.dart';
 
@@ -15,7 +15,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
