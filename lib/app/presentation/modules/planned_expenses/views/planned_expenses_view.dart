@@ -22,17 +22,21 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
         padding: const EdgeInsets.fromLTRB(4, 8, 4, 0),
         child: FutureBuilder(
           future: controller.getPlannedExpensesLocalDataSource(),
-          initialData: const [],
           builder: ((context, snapshot) {
             if (!snapshot.hasData) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 1.5,
+                ),
+              );
             } else {
-              return Obx(()=>
-                 ListView.builder(
+              return Obx(
+                () => ListView.builder(
                   itemCount: controller.plannedExpenseList.length,
                   itemBuilder: ((context, index) {
                     var plannedExpense = controller.plannedExpenseList[index];
-                    return PlannedExpensesCardWidget(title: plannedExpense.month);
+                    return PlannedExpensesCardWidget(
+                        title: plannedExpense.month);
                   }),
                 ),
               );
