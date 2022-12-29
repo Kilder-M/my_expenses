@@ -37,6 +37,9 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
                   itemBuilder: ((context, index) {
                     var plannedExpense = controller.plannedExpenseList[index];
                     return PlannedExpensesCardWidget(
+                      iconColor: Colors.orange,
+                      statusIcon: Icons.timer_outlined,
+                      status: 'Em Andamento',
                       title: DateTimeManagerUtil.getYearAndMonth(
                         plannedExpense.month,
                       ),
@@ -57,7 +60,6 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
       title: const Text(
         'Gastos Mensais',
       ),
-      centerTitle: true,
       actions: [
         IconButton(
           icon: const Icon(Icons.filter_list_outlined),
