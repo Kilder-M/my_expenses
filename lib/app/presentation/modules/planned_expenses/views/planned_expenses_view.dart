@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_expenses/app/core/utils/date_time_manager_util.dart';
 import 'package:my_expenses/app/presentation/widgets/planned_expenses_card_widget.dart';
 
 import '../controllers/planned_expenses_controller.dart';
@@ -36,7 +37,10 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
                   itemBuilder: ((context, index) {
                     var plannedExpense = controller.plannedExpenseList[index];
                     return PlannedExpensesCardWidget(
-                        title: plannedExpense.month.toString());
+                      title: DateTimeManagerUtil.getYearAndMonth(
+                        plannedExpense.month,
+                      ),
+                    );
                   }),
                 ),
               );
