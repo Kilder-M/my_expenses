@@ -8,8 +8,8 @@ environment:
 dependencies: 
   cupertino_icons: ^1.0.2
   mocktail: ^0.3.0
-  intl: ^0.18.0
-  localization: ^2.1.0
+  intl: ^0.17.0
+  flutter_localization: ^0.1.9
   sqflite: ^2.2.2
   path: ^1.8.2
   get: 4.6.5
