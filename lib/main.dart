@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_expenses/app/core/utils/localization_manager_util.dart';
 
 import 'app/routes/app_pages.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  final localizationManager = LocalizationManagerUtil();
   runApp(
     GetMaterialApp(
       title: "Application",
@@ -11,8 +14,11 @@ void main() {
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
       theme: projectThemeData(),
+      supportedLocales: localizationManager.localization.supportedLocales,
+      localizationsDelegates: localizationManager.localization.localizationsDelegates,
     ),
   );
+  
 }
 
 ThemeData projectThemeData() {
@@ -25,6 +31,7 @@ ThemeData projectThemeData() {
       backgroundColor: Colors.white,
     ),
     appBarTheme: AppBarTheme(
+      centerTitle: true,
       iconTheme: const IconThemeData(
         color: Colors.black,
       ),
