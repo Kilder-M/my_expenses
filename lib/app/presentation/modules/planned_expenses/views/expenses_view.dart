@@ -25,7 +25,32 @@ class ExpensesView extends GetView<ExpensesController> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const RemainderAndWageAndAmountCardWidget(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            controller: ScrollController(initialScrollOffset: 80),
+            child: Row(
+              children:  [
+                RemainderAndWageAndAmountCardWidget(
+                  backgroundColor: Colors.green,
+                  icon: Icons.arrow_circle_up_rounded,
+                  cardTitle: 'Ganho mensal',
+                  cardValue: plannedExpenseArgument.wage,
+                ),
+                RemainderAndWageAndAmountCardWidget(
+                  backgroundColor: Colors.orange,
+                  icon: Icons.arrow_circle_down_rounded,
+                  cardTitle: 'Despesas',
+                  cardValue: plannedExpenseArgument.calculateAmount,
+                ),
+                RemainderAndWageAndAmountCardWidget(
+                  backgroundColor: Colors.deepPurple,
+                  icon: Icons.arrow_circle_up_rounded,
+                  cardTitle: 'Sobra',
+                  cardValue:  plannedExpenseArgument.calculateRemainder,
+                ),
+              ],
+            ),
+          ),
           subtitle(),
           expenseList(plannedExpenseArgument),
         ],

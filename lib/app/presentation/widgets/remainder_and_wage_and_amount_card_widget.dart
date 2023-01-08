@@ -2,36 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/app/core/utils/currency_format_manager_util.dart';
 
 class RemainderAndWageAndAmountCardWidget extends StatelessWidget {
-  const RemainderAndWageAndAmountCardWidget({super.key});
+  final String cardTitle;
+  final double cardValue;
+  final Color backgroundColor;
+  final Color? cardValueColor;
+  final IconData icon;
+  const RemainderAndWageAndAmountCardWidget({
+    super.key,
+    required this.backgroundColor,
+    required this.icon,
+    required this.cardTitle,
+    required this.cardValue,
+    this.cardValueColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 120,
+      width: 160,
       child: Card(
+        elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(15),
         ),
+        color: backgroundColor,
         child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  wageAndExpenseAmount(
-                    title: 'GANHOS',
-                    subtitle: 10.00,
-                  ),
-                  wageAndExpenseAmount(
-                    title: 'DESPESAS',
-                    subtitle: 10.00,
-                  ),
-                ],
-              ),
-              remainderValue()
+              cardTitleRow(),
+              cardValueMethod(),
             ],
           ),
         ),
@@ -39,53 +42,38 @@ class RemainderAndWageAndAmountCardWidget extends StatelessWidget {
     );
   }
 
-  Column wageAndExpenseAmount({
-    required String title,
-    required double subtitle,
-  }) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 12,
-            letterSpacing: -0.5,
-            color: Colors.grey[600],
-            fontWeight: FontWeight.w400,
-          ),
+  SizedBox cardValueMethod() {
+    return SizedBox(
+      width: double.infinity,
+      child: Text(
+        CurrencyFormatManagerUtil.getCurrencyFormat(cardValue),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(
+          fontSize: 18,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
         ),
-        Text(
-          CurrencyFormatManagerUtil.getCurrencyFormat(subtitle),
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
+      ),
     );
   }
 
-  Widget remainderValue() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
+  Row cardTitleRow() {
+    return Row(
       children: [
-        Text(
-          'SOBRA',
-          style: TextStyle(
-            fontSize: 12,
-            letterSpacing: -0.5,
-            color: Colors.grey[600],
-            fontWeight: FontWeight.w400,
+        Padding(
+          padding: const EdgeInsets.only(right: 4),
+          child: Icon(
+            icon,
+            size: 14,
+            color: Colors.white,
           ),
         ),
         Text(
-          CurrencyFormatManagerUtil.getCurrencyFormat(10.00),
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
+          cardTitle,
+          style:  TextStyle(
+            fontSize: 14,
+            color: cardValueColor ?? Colors.white,
           ),
         ),
       ],
