@@ -11,52 +11,24 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        mini: true,
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: floatingActionButton(),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       appBar: appBar(context),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(4, 8, 4, 0),
-        child: FutureBuilder(
-          future: controller.getPlannedExpensesLocalDataSource(),
-          builder: ((context, snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  strokeWidth: 1.5,
-                ),
-              );
-            } else {
-              return Obx(
-                () => ListView.builder(
-                  itemCount: controller.plannedExpenseList.length,
-                  itemBuilder: ((context, index) {
-                    var plannedExpense = controller.plannedExpenseList[index];
-                    return PlannedExpensesCardWidget(
-                      iconColor: Colors.orange,
-                      statusIcon: Icons.timer_outlined,
-                      status: 'Em Andamento',
-                      title: DateTimeManagerUtil.getYearAndMonth(
-                        plannedExpense.month,
-                      ),
-                    );
-                  }),
-                ),
-              );
-            }
-          }),
-        ),
-      ),
+      body: futurePlannedExpenseList(),
+    );
+  }
+
+  FloatingActionButton floatingActionButton() {
+    return FloatingActionButton(
+      mini: true,
+      onPressed: () {},
+      child: const Icon(Icons.add),
     );
   }
 
   AppBar appBar(BuildContext context) {
     return AppBar(
-      elevation: 0,
       title: const Text(
         'Gastos Mensais',
       ),
@@ -66,6 +38,44 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
           onPressed: () {},
         ),
       ],
+    );
+  }
+
+  Padding futurePlannedExpenseList() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(4, 8, 4, 0),
+      child: FutureBuilder(
+        future: controller.getPlannedExpensesLocalDataSource(),
+        builder: ((context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 1.5,
+              ),
+            );
+          } else {
+            return Obx(
+              () => ListView.builder(
+                itemCount: controller.plannedExpenseList.length,
+                itemBuilder: ((context, index) {
+                  var plannedExpense = controller.plannedExpenseList[index];
+                  return PlannedExpensesCardWidget(
+                    iconColor: Colors.orange,
+                    onTap: () {
+                      Get.toNamed('/expenses',arguments: plannedExpense);
+                    },
+                    statusIcon: Icons.timer_outlined,
+                    status: 'Em Andamento',
+                    title: DateTimeManagerUtil.getYearAndMonth(
+                      plannedExpense.month,
+                    ),
+                  );
+                }),
+              ),
+            );
+          }
+        }),
+      ),
     );
   }
 }
