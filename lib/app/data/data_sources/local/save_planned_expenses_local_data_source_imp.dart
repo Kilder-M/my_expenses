@@ -15,7 +15,7 @@ class SavePlannedExpenseLocalDataSourceImp
       VALUES(?,?,?,?)
     ''';
     var saveResponse = await databaseResponse.rawInsert(sql, [
-      plannedExpensesEntity.month,
+      plannedExpensesEntity.month.toIso8601String(),
       plannedExpensesEntity.amount,
       plannedExpensesEntity.wage,
       plannedExpensesEntity.remainder,
