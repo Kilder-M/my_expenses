@@ -10,6 +10,7 @@ dependencies:
   currency_text_input_formatter: ^2.1.8
   intl: ^0.17.0
   flutter_localization: ^0.1.9
+  lottie: ^1.4.3
   sqflite: ^2.2.2
   path: ^1.8.2
   get: 4.6.5
@@ -26,3 +27,5 @@ dev_dependencies:
 flutter: 
   uses-material-design: true
 
+  assets:
+    - assets/animations/sucess.json
