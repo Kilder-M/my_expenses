@@ -18,6 +18,4 @@ class PlannedExpensesController extends GetxController {
       getPlannedExpensesLocalDataSource() async {
     return plannedExpenseList.value = await _getPlannedExpensesListUseCase();
   }
-
-
 }
