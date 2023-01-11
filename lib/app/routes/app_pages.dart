@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:my_expenses/app/presentation/modules/planned_expenses/views/expense_form_view.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/views/expenses_view.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/views/planned_expenses_form_view.dart';
 
@@ -33,6 +34,11 @@ class AppPages {
     GetPage(
       name: _Paths.expenses,
       page: () => const ExpensesView(),
+      binding: PlannedExpensesBinding(),
+    ),
+    GetPage(
+      name: _Paths.expenseForm,
+      page: () => const ExpenseFormView(),
       binding: PlannedExpensesBinding(),
     ),
    

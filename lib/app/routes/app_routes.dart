@@ -7,6 +7,7 @@ abstract class Routes {
   static const plannedExpenses= _Paths.plannedExpenses;
   static const plannedExpensesForm= _Paths.plannedExpensesForm;
   static const expenses= _Paths.expenses;
+  static const expenseForm= _Paths.expenseForm;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const plannedExpenses = '/planned-expenses';
   static const plannedExpensesForm = '/planned-expenses-form';
   static const expenses = '/expenses';
+  static const expenseForm = '/expense-form';
 }

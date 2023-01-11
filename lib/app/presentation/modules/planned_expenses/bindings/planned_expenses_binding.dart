@@ -35,6 +35,7 @@ import 'package:my_expenses/app/domain/usecases/save_planned_expenses_usecase/sa
 import 'package:my_expenses/app/domain/usecases/save_planned_expenses_usecase/save_planned_expenses_usecase_imp.dart';
 import 'package:my_expenses/app/domain/usecases/update_expense_usecase/update_expense_usecase.dart';
 import 'package:my_expenses/app/domain/usecases/update_expense_usecase/update_expense_usecase_imp.dart';
+import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/expense_form_controller.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/expenses_controller.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/planned_expenses_form_controller.dart';
 
@@ -54,6 +55,9 @@ class PlannedExpensesBinding extends Bindings {
     );
     Get.lazyPut<PlannedExpensesFormController>(
       () => PlannedExpensesFormController(),
+    );
+    Get.lazyPut<ExpenseFormController>(
+      () => ExpenseFormController(),
     );
 
     //database
