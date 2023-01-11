@@ -17,6 +17,9 @@ class PlannedExpensesDTO extends PlannedExpensesEntity {
           wage: wage,
           remainder: remainder,
         );
+
+  get dateTimeToString => month.toIso8601String();
+
   factory PlannedExpensesDTO.fromMapLocalDatabase(Map<String, dynamic> json) =>
       PlannedExpensesDTO(
         id: json['id'],
