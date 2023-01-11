@@ -18,7 +18,6 @@ class PlannedExpensesDTO extends PlannedExpensesEntity {
           remainder: remainder,
         );
 
-  get dateTimeToString => month.toIso8601String();
 
   factory PlannedExpensesDTO.fromMapLocalDatabase(Map<String, dynamic> json) =>
       PlannedExpensesDTO(
@@ -28,12 +27,4 @@ class PlannedExpensesDTO extends PlannedExpensesEntity {
         month:  DateTime.parse(json["month"]),
         wage: json['wage'],
       );
-
-  Map<String, dynamic> toMapLocalDatabase() => {
-        'id': id,
-        'amount': amount,
-        'remainder': remainder,
-         "month":  month.toIso8601String(),
-        'wage': wage,
-      };
 }
