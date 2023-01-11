@@ -22,7 +22,9 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
   FloatingActionButton floatingActionButton() {
     return FloatingActionButton(
       mini: true,
-      onPressed: () {},
+      onPressed: () {
+        Get.toNamed('/planned-expenses-form');
+      },
       child: const Icon(Icons.add),
     );
   }
@@ -62,7 +64,7 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
                   return PlannedExpensesCardWidget(
                     iconColor: Colors.orange,
                     onTap: () {
-                      Get.toNamed('/expenses',arguments: plannedExpense);
+                      Get.toNamed('/expenses', arguments: plannedExpense);
                     },
                     statusIcon: Icons.timer_outlined,
                     status: 'Em Andamento',

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/views/expenses_view.dart';
+import 'package:my_expenses/app/presentation/modules/planned_expenses/views/planned_expenses_form_view.dart';
 
 import '../presentation/modules/home/bindings/home_binding.dart';
 import '../presentation/modules/home/views/home_view.dart';
@@ -24,10 +25,16 @@ class AppPages {
       page: () => const PlannedExpensesView(),
       binding: PlannedExpensesBinding(),
     ),
+     GetPage(
+      name: _Paths.plannedExpensesForm,
+      page: () => const PlannedExpensesFormView(),
+      binding: PlannedExpensesBinding(),
+    ),
     GetPage(
       name: _Paths.expenses,
       page: () => const ExpensesView(),
       binding: PlannedExpensesBinding(),
     ),
+   
   ];
 }
