@@ -7,7 +7,7 @@ environment:
 
 dependencies: 
   cupertino_icons: ^1.0.2
-  mocktail: ^0.3.0
+  currency_text_input_formatter: ^2.1.8
   intl: ^0.17.0
   flutter_localization: ^0.1.9
   sqflite: ^2.2.2
@@ -20,6 +20,8 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test: 
     sdk: flutter
+  mocktail: ^0.3.0
+  
 
 flutter: 
   uses-material-design: true
