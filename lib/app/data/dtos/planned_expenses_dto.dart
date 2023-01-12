@@ -11,7 +11,6 @@ class PlannedExpensesDTO extends PlannedExpensesEntity {
     required double wage,
   }) : super(
           id: id,
-          expensesEntityList: expensesEntityList,
           month: month,
           amount: amount,
           wage: wage,
