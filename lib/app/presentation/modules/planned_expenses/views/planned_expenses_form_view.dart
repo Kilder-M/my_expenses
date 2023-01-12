@@ -25,6 +25,7 @@ class PlannedExpensesFormView extends GetView<PlannedExpensesFormController> {
 
   FloatingActionButton _floatActionButton(BuildContext context) {
     return FloatingActionButton(
+      mini: true,
       child: const Icon(Icons.save_outlined),
       onPressed: () async {
         try {
