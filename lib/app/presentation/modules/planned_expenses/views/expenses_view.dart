@@ -13,7 +13,7 @@ class ExpensesView extends GetView<ExpensesController> {
   Widget build(BuildContext context) {
     PlannedExpensesEntity plannedExpenseArgument = Get.arguments;
     return Scaffold(
-      floatingActionButton: _floatActionButton(),
+      floatingActionButton: _floatActionButton(plannedExpenseArgument),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       appBar: _appBar(plannedExpenseArgument),
@@ -21,10 +21,11 @@ class ExpensesView extends GetView<ExpensesController> {
     );
   }
 
-  FloatingActionButton _floatActionButton() {
+  FloatingActionButton _floatActionButton(
+      PlannedExpensesEntity plannedExpenseArgument) {
     return FloatingActionButton(
       onPressed: () {
-        Get.toNamed('/expense-form');
+        Get.toNamed('/expense-form', arguments: plannedExpenseArgument);
       },
       mini: true,
       child: const Icon(Icons.add),
