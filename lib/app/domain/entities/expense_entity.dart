@@ -1,4 +1,3 @@
-
 class ExpenseEntity {
   int? id;
   int plannedExpensesId;
@@ -8,10 +7,10 @@ class ExpenseEntity {
   String status;
 
   ExpenseEntity({
-     this.id,
+    this.id,
     required this.plannedExpensesId,
     required this.paymentType,
-    required this.status,
+    this.status = 'Não pago',
     required this.name,
     required this.value,
   });
