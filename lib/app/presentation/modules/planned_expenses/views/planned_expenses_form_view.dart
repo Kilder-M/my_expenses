@@ -56,7 +56,7 @@ class PlannedExpensesFormView extends GetView<PlannedExpensesFormController> {
 
   Widget _body(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
