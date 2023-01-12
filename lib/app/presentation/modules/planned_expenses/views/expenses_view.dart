@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_expenses/app/core/utils/currency_format_manager_util.dart';
 import 'package:my_expenses/app/core/utils/date_time_manager_util.dart';
 import 'package:my_expenses/app/domain/entities/planned_expenses_entity.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/expenses_controller.dart';
@@ -14,51 +13,25 @@ class ExpensesView extends GetView<ExpensesController> {
   Widget build(BuildContext context) {
     PlannedExpensesEntity plannedExpenseArgument = Get.arguments;
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        mini: true,
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: _floatActionButton(),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
-      appBar: appBar(plannedExpenseArgument),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            controller: ScrollController(initialScrollOffset: 80),
-            child: Row(
-              children:  [
-                RemainderAndWageAndAmountCardWidget(
-                  backgroundColor: Colors.green,
-                  icon: Icons.arrow_circle_up_rounded,
-                  cardTitle: 'Ganho mensal',
-                  cardValue: plannedExpenseArgument.wage,
-                ),
-                RemainderAndWageAndAmountCardWidget(
-                  backgroundColor: Colors.orange,
-                  icon: Icons.arrow_circle_down_rounded,
-                  cardTitle: 'Despesas',
-                  cardValue: plannedExpenseArgument.calculateAmount,
-                ),
-                RemainderAndWageAndAmountCardWidget(
-                  backgroundColor: Colors.deepPurple,
-                  icon: Icons.arrow_circle_up_rounded,
-                  cardTitle: 'Sobra',
-                  cardValue:  plannedExpenseArgument.calculateRemainder,
-                ),
-              ],
-            ),
-          ),
-          subtitle(),
-          expenseList(plannedExpenseArgument),
-        ],
-      ),
+      appBar: _appBar(plannedExpenseArgument),
+      body: _body(plannedExpenseArgument),
     );
   }
 
-  AppBar appBar(PlannedExpensesEntity plannedExpenseArgument) {
+  FloatingActionButton _floatActionButton() {
+    return FloatingActionButton(
+      onPressed: () {
+        Get.toNamed('/expense-form');
+      },
+      mini: true,
+      child: const Icon(Icons.add),
+    );
+  }
+
+  AppBar _appBar(PlannedExpensesEntity plannedExpenseArgument) {
     return AppBar(
       title: Text(
         DateTimeManagerUtil.getYearAndMonth(
@@ -68,51 +41,48 @@ class ExpensesView extends GetView<ExpensesController> {
     );
   }
 
-  Padding titleAndSubTitlesRow(PlannedExpensesEntity plannedExpenseArgument) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 0, 12, 20),
+  Widget _body(PlannedExpensesEntity plannedExpenseArgument) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _remainderAndWageAndAmountCardWidgetRow(plannedExpenseArgument),
+        _subtitle(),
+        _expenseList(plannedExpenseArgument),
+      ],
+    );
+  }
+
+  Widget _remainderAndWageAndAmountCardWidgetRow(
+      PlannedExpensesEntity plannedExpenseArgument) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      controller: ScrollController(initialScrollOffset: 80),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          titleAndSubtitle(
-              title: 'GANHOS', subtitle: plannedExpenseArgument.wage),
-          titleAndSubtitle(
-              title: 'GASTOS',
-              subtitle: plannedExpenseArgument.calculateAmount),
-          titleAndSubtitle(
-              title: 'SOBRA',
-              subtitle: plannedExpenseArgument.calculateRemainder),
+          RemainderAndWageAndAmountCardWidget(
+            backgroundColor: Colors.green,
+            icon: Icons.arrow_circle_up_rounded,
+            cardTitle: 'Ganho mensal',
+            cardValue: plannedExpenseArgument.wage,
+          ),
+          RemainderAndWageAndAmountCardWidget(
+            backgroundColor: Colors.orange,
+            icon: Icons.arrow_circle_down_rounded,
+            cardTitle: 'Despesas',
+            cardValue: plannedExpenseArgument.calculateAmount,
+          ),
+          RemainderAndWageAndAmountCardWidget(
+            backgroundColor: Colors.deepPurple,
+            icon: Icons.arrow_circle_up_rounded,
+            cardTitle: 'Sobra',
+            cardValue: plannedExpenseArgument.calculateRemainder,
+          ),
         ],
       ),
     );
   }
 
-  Column titleAndSubtitle({required String title, required double subtitle}) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 12,
-            letterSpacing: -0.5,
-            color: Colors.grey[600],
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        Text(
-          CurrencyFormatManagerUtil.getCurrencyFormat(subtitle),
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget subtitle() {
+  Widget _subtitle() {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: Text(
@@ -125,7 +95,7 @@ class ExpensesView extends GetView<ExpensesController> {
     );
   }
 
-  Widget expenseList(PlannedExpensesEntity plannedExpenseArgument) {
+  Widget _expenseList(PlannedExpensesEntity plannedExpenseArgument) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
