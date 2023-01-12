@@ -2,7 +2,6 @@ import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 
 class PlannedExpensesEntity {
   int? id;
-  List<ExpenseEntity> expensesEntityList;
   DateTime month;
   double? amount;
   double wage;
@@ -10,14 +9,13 @@ class PlannedExpensesEntity {
 
   PlannedExpensesEntity({
     this.id,
-    this.expensesEntityList = const [],
     required this.month,
     this.amount = 0,
     required this.wage,
     this.remainder,
   });
 
-  double get calculateAmount {
+  double calculateAmount(List<ExpenseEntity> expensesEntityList) {
     double amountResult = 0.0;
     for (var expensesEntityList in expensesEntityList) {
       amountResult += expensesEntityList.value;
@@ -25,7 +23,7 @@ class PlannedExpensesEntity {
     return amountResult;
   }
 
-  double get calculateRemainder {
-    return wage - calculateAmount;
+  double  calculateRemainder(List<ExpenseEntity> expensesEntityList) {
+    return wage - calculateAmount(expensesEntityList);
   }
 }
