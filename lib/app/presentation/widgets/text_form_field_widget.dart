@@ -70,21 +70,25 @@ class TextFormFieldWidget extends StatelessWidget {
       enabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
           color: Color.fromARGB(255, 117, 117, 117),
+          width: 0.3,
         ),
       ),
       focusedBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
           color: Color.fromARGB(255, 117, 117, 117),
+          width: 0.3,
         ),
       ),
       border: const UnderlineInputBorder(
         borderSide: BorderSide(
           color: Color.fromARGB(255, 117, 117, 117),
+          width: 0.3,
         ),
       ),
       disabledBorder: const UnderlineInputBorder(
         borderSide: BorderSide(
           color: Color.fromARGB(255, 117, 117, 117),
+          width: 0.3,
         ),
       ),
     );
