@@ -58,27 +58,28 @@ class ExpensesView extends GetView<ExpensesController> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       controller: ScrollController(initialScrollOffset: 80),
-      child: Row(
-        children: [
-          RemainderAndWageAndAmountCardWidget(
-            backgroundColor: Colors.green,
-            icon: Icons.arrow_circle_up_rounded,
-            cardTitle: 'Ganho mensal',
-            cardValue: plannedExpenseArgument.wage,
-          ),
-          RemainderAndWageAndAmountCardWidget(
-            backgroundColor: Colors.orange,
-            icon: Icons.arrow_circle_down_rounded,
-            cardTitle: 'Despesas',
-            cardValue: plannedExpenseArgument.calculateAmount(controller.expensesList),
-          ),
-          RemainderAndWageAndAmountCardWidget(
-            backgroundColor: Colors.deepPurple,
-            icon: Icons.arrow_circle_up_rounded,
-            cardTitle: 'Sobra',
-            cardValue: plannedExpenseArgument.calculateRemainder(controller.expensesList),
-          ),
-        ],
+      child: Obx( ()=> Row(
+          children: [
+            RemainderAndWageAndAmountCardWidget(
+              backgroundColor: Colors.green,
+              icon: Icons.arrow_circle_up_rounded,
+              cardTitle: 'Ganho mensal',
+              cardValue: plannedExpenseArgument.wage,
+            ),
+            RemainderAndWageAndAmountCardWidget(
+              backgroundColor: Colors.orange,
+              icon: Icons.arrow_circle_down_rounded,
+              cardTitle: 'Despesas',
+              cardValue: plannedExpenseArgument.calculateAmount(controller.expensesList),
+            ),
+            RemainderAndWageAndAmountCardWidget(
+              backgroundColor: Colors.deepPurple,
+              icon: Icons.align_vertical_bottom_rounded,
+              cardTitle: 'Sobra',
+              cardValue: plannedExpenseArgument.calculateRemainder(controller.expensesList),
+            ),
+          ],
+        ),
       ),
     );
   }
