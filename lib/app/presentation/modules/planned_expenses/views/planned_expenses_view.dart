@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_expenses/app/core/utils/date_time_manager_util.dart';
 import 'package:my_expenses/app/presentation/widgets/planned_expenses_card_widget.dart';
+import 'package:my_expenses/app/presentation/widgets/sucess_alert_widget.dart';
 
 import '../controllers/planned_expenses_controller.dart';
 
@@ -66,7 +67,7 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
       ),
     );
   }
-  
+
   Widget _listViewBuilder() {
     return Obx(
       () => ListView.builder(
@@ -75,6 +76,37 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
           var plannedExpense = controller.plannedExpenseList[index];
           return PlannedExpensesCardWidget(
             iconColor: Colors.orange,
+            onTapIcon: () {
+              showDialog(
+                context: context,
+                builder: ((context) => AlertDialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25)),
+                      title: const Text('Você deseja excluir ?'),
+                      actions: [
+                        TextButton(
+                          onPressed: Get.back,
+                          child: const Text('Não'),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            await controller
+                                .deletePlannedExpensesLocalDataSource(
+                                    plannedExpense);
+                            Get.back();
+                            showDialog(
+                              context: context,
+                              builder: ((context) => const SucessAlert(
+                                    title: 'Gasto mensal excluído com sucesso!',
+                                  )),
+                            );
+                          },
+                          child: const Text('Sim'),
+                        )
+                      ],
+                    )),
+              );
+            },
             onTap: () {
               Get.toNamed('/expenses', arguments: plannedExpense);
             },
@@ -88,6 +120,4 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
       ),
     );
   }
-
-  
 }

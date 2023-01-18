@@ -4,14 +4,16 @@ class PlannedExpensesCardWidget extends StatelessWidget {
   final String title, status;
   final IconData statusIcon;
   final Color iconColor;
-  final void Function()? onTap;
-  const PlannedExpensesCardWidget(
-      {super.key,
-      required this.title,
-      this.onTap,
-      required this.status,
-      required this.statusIcon,
-      required this.iconColor});
+  final void Function()? onTap, onTapIcon;
+  const PlannedExpensesCardWidget({
+    super.key,
+    required this.title,
+    this.onTap,
+    required this.status,
+    required this.statusIcon,
+    required this.iconColor,
+    this.onTapIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +48,13 @@ class PlannedExpensesCardWidget extends StatelessWidget {
         trailing: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            Icon(
-              Icons.more_horiz,
-              color: Colors.black87,
+          children: [
+            GestureDetector(
+              onTap: onTapIcon,
+              child: const Icon(
+                Icons.more_horiz,
+                color: Colors.black87,
+              ),
             ),
           ],
         ),

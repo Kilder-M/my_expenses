@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +36,6 @@ class ExpenseFormView extends GetView<ExpenseFormController> {
           showDialog(
             context: context,
             builder: (context) {
-              Timer(const Duration(milliseconds: 1300), () => Get.back());
               return const SucessAlert(
                 title: 'Salvo com sucesso!',
               );
