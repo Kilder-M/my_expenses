@@ -7,7 +7,7 @@ void main() {
       id: 1,
       name: 'agua',
       paymentType: 'TED',
-      status: 'Em aberto',
+      isPayed: false,
       value: 90.0,
       plannedExpensesId: 1,
     );

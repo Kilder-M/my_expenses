@@ -4,13 +4,13 @@ class ExpenseEntity {
   String name;
   double value;
   String paymentType;
-  String status;
+  bool isPayed;
 
   ExpenseEntity({
     this.id,
     required this.plannedExpensesId,
     required this.paymentType,
-    this.status = 'Não pago',
+    this.isPayed = false,
     required this.name,
     required this.value,
   });
