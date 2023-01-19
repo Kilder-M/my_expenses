@@ -7,13 +7,13 @@ class ExpenseDTO extends ExpenseEntity {
     required String name,
     required double value,
     required String paymentType,
-    required String status,
+    required bool isPayed,
   }) : super(
             id: id,
             plannedExpensesId: plannedExpensesId,
             name: name,
             paymentType: paymentType,
-            status: status,
+            isPayed: isPayed,
             value: value);
 
   factory ExpenseDTO.fromMapLocalDatabase(Map<String, dynamic> json) => ExpenseDTO(
@@ -22,7 +22,7 @@ class ExpenseDTO extends ExpenseEntity {
         name: json['name'],
         value: json['value'],
         paymentType: json['payment_type'],
-        status: json['status'],
+        isPayed: json['status'],
       );
 
   Map<String, dynamic> toMapLocalDatabase() => {
@@ -30,6 +30,6 @@ class ExpenseDTO extends ExpenseEntity {
         'planned_expenses_id': plannedExpensesId,
         'name': name,
         'value': value,
-        'status': status,
+        'status': isPayed,
       };
 }
