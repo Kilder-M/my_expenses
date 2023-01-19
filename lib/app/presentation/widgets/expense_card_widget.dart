@@ -6,8 +6,9 @@ class ExpenseCardWidget extends StatelessWidget {
   final double value;
   final IconData statusIcon;
   final Color iconColor;
+  final bool switchValue;
   final void Function()? onTap;
-  final void Function(bool)? onChanged;
+  final void Function(bool)? switchOnChanged;
 
   const ExpenseCardWidget({
     super.key,
@@ -18,7 +19,8 @@ class ExpenseCardWidget extends StatelessWidget {
     required this.value,
     required this.paymentForm,
     this.onTap,
-    this.onChanged,
+    this.switchOnChanged,
+    required this.switchValue,
   });
 
   @override
@@ -49,16 +51,15 @@ class ExpenseCardWidget extends StatelessWidget {
     );
   }
 
-  SizedBox trailingSwitch() {
+  Widget trailingSwitch() {
     return SizedBox(
-      height: 20,
-      width: 50,
-      child: Switch(
-        value: true,
-        activeColor: Colors.green,
-        onChanged: onChanged,
-      ),
-    );
+        height: 20,
+        width: 50,
+        child: Switch(
+          value: switchValue,
+          activeColor: Colors.green,
+          onChanged: switchOnChanged,
+        ));
   }
 
   Widget subtitleStatus() {

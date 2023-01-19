@@ -58,7 +58,8 @@ class ExpensesView extends GetView<ExpensesController> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       controller: ScrollController(initialScrollOffset: 80),
-      child: Obx( ()=> Row(
+      child: Obx(
+        () => Row(
           children: [
             RemainderAndWageAndAmountCardWidget(
               backgroundColor: Colors.green,
@@ -70,13 +71,15 @@ class ExpensesView extends GetView<ExpensesController> {
               backgroundColor: Colors.orange,
               icon: Icons.arrow_circle_down_rounded,
               cardTitle: 'Despesas',
-              cardValue: plannedExpenseArgument.calculateAmount(controller.expensesList),
+              cardValue: plannedExpenseArgument
+                  .calculateAmount(controller.expensesList),
             ),
             RemainderAndWageAndAmountCardWidget(
               backgroundColor: Colors.deepPurple,
               icon: Icons.align_vertical_bottom_rounded,
               cardTitle: 'Sobra',
-              cardValue: plannedExpenseArgument.calculateRemainder(controller.expensesList),
+              cardValue: plannedExpenseArgument
+                  .calculateRemainder(controller.expensesList),
             ),
           ],
         ),
@@ -116,15 +119,23 @@ class ExpensesView extends GetView<ExpensesController> {
                   itemCount: controller.expensesList.length,
                   itemBuilder: ((context, index) {
                     var plannedExpense = controller.expensesList[index];
-                    return ExpenseCardWidget(
-                      iconColor: Colors.orange,
-                      // onTap: () {
-                      // },
-                      paymentForm: plannedExpense.paymentType,
-                      value: plannedExpense.value,
-                      statusIcon: Icons.currency_exchange_outlined,
-                      subtitle: plannedExpense.paymentType,
-                      title: plannedExpense.name,
+                    var switchValue = plannedExpense.isPayed.obs;
+                    return Obx(
+                      () => ExpenseCardWidget(
+                        iconColor: Colors.orange,
+                        paymentForm: plannedExpense.paymentType,
+                        value: plannedExpense.value,
+                        statusIcon: Icons.currency_exchange_outlined,
+                        subtitle: plannedExpense.paymentType,
+                        title: plannedExpense.name,
+                        switchOnChanged: (value) async {
+                          await controller
+                              .updateExpenseStatusToPayedLocalDataSource(
+                                  plannedExpense);
+                          switchValue.value = plannedExpense.isPayed;
+                        },
+                        switchValue: switchValue.value,
+                      ),
                     );
                   }),
                 ),
