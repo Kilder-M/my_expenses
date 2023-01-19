@@ -11,7 +11,7 @@ class SaveExpanseLocalDataSourceImp implements SaveExpenseDataSource {
   Future<bool> call(ExpenseEntity expenseEntity) async {
     final databaseResponse = await _getDataBaseImp();
     const sql =
-        '''INSERT INTO expense(planned_expenses_id,name,value,payment_type,status)
+        '''INSERT INTO expense(planned_expenses_id,name,value,payment_type,isPayed)
         VALUES(?,?,?,?,?)
         ''';
    var saveResponse =  await databaseResponse.rawInsert(sql, [
@@ -19,7 +19,7 @@ class SaveExpanseLocalDataSourceImp implements SaveExpenseDataSource {
       expenseEntity.name,
       expenseEntity.value,
       expenseEntity.paymentType,
-      expenseEntity.status,
+      expenseEntity.isPayed ? 1 : 0,
     ]);
     return saveResponse != 0 ? true : false;
   }

@@ -10,7 +10,7 @@ class UpdateExpenseLocalDataSourceImp implements UpdateExpenseDataSource {
   Future<bool> call(ExpenseEntity expenseEntity) async {
     final databaseResponse = await _getDataBaseImp();
     const sql = '''
-        UPDATE expense SET name = ?, value = ?, payment_type = ?,status = ? WHERE id = ?
+        UPDATE expense SET name = ?, value = ?, payment_type = ?,isPayed = ? WHERE id = ?
       ''';
     final updateResponse = await databaseResponse.rawUpdate(
       sql,
@@ -18,7 +18,7 @@ class UpdateExpenseLocalDataSourceImp implements UpdateExpenseDataSource {
         expenseEntity.name,
         expenseEntity.value,
         expenseEntity.paymentType,
-        expenseEntity.status,
+        expenseEntity.isPayed ? 1 : 0,
         expenseEntity.id,
       ],
     );

@@ -5,7 +5,7 @@ const createExpenseTable = '''
     ,name VARCHAR(200) NOT NULL
     ,value REAL NOT NULL
     ,payment_type CHAR(10)
-    ,status CHAR(15)
+    ,isPayed INTEGER NOT NULL 
     ,FOREIGN KEY (planned_expenses_id) REFERENCES planned_expenses (id)
   )
 ''';

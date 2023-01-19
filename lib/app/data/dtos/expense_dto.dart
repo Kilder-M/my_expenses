@@ -22,7 +22,7 @@ class ExpenseDTO extends ExpenseEntity {
         name: json['name'],
         value: json['value'],
         paymentType: json['payment_type'],
-        isPayed: json['status'],
+        isPayed: json['isPayed'] == 0 ? false : true,
       );
 
   Map<String, dynamic> toMapLocalDatabase() => {
@@ -30,6 +30,6 @@ class ExpenseDTO extends ExpenseEntity {
         'planned_expenses_id': plannedExpensesId,
         'name': name,
         'value': value,
-        'status': isPayed,
+        'isPayed': isPayed,
       };
 }
