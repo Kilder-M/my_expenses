@@ -25,7 +25,7 @@ class ExpensesView extends GetView<ExpensesController> {
       PlannedExpensesEntity plannedExpenseArgument) {
     return FloatingActionButton(
       onPressed: () {
-        Get.toNamed('/expense-form', arguments: plannedExpenseArgument);
+        Get.toNamed('/expense-form', arguments: [plannedExpenseArgument,null]);
       },
       mini: true,
       child: const Icon(Icons.add),
@@ -118,21 +118,25 @@ class ExpensesView extends GetView<ExpensesController> {
                 () => ListView.builder(
                   itemCount: controller.expensesList.length,
                   itemBuilder: ((context, index) {
-                    var plannedExpense = controller.expensesList[index];
-                    var switchValue = plannedExpense.isPayed.obs;
+                    var expense = controller.expensesList[index];
+                    var switchValue = expense.isPayed.obs;
                     return Obx(
                       () => ExpenseCardWidget(
+                        onTap: () {
+                          Get.toNamed('/expense-form',
+                              arguments: [plannedExpenseArgument,expense]);
+                        },
                         iconColor: Colors.orange,
-                        paymentForm: plannedExpense.paymentType,
-                        value: plannedExpense.value,
+                        paymentForm: expense.paymentType,
+                        value: expense.value,
                         statusIcon: Icons.currency_exchange_outlined,
-                        subtitle: plannedExpense.paymentType,
-                        title: plannedExpense.name,
+                        subtitle: expense.paymentType,
+                        title: expense.name,
                         switchOnChanged: (value) async {
                           await controller
                               .updateExpenseStatusToPayedLocalDataSource(
-                                  plannedExpense);
-                          switchValue.value = plannedExpense.isPayed;
+                                  expense);
+                          switchValue.value = expense.isPayed;
                         },
                         switchValue: switchValue.value,
                       ),

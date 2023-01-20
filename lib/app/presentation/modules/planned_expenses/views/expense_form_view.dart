@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_expenses/app/domain/entities/planned_expenses_entity.dart';
@@ -12,7 +11,9 @@ class ExpenseFormView extends GetView<ExpenseFormController> {
 
   @override
   Widget build(BuildContext context) {
-    PlannedExpensesEntity plannedExpensesArgument = Get.arguments;
+    PlannedExpensesEntity plannedExpensesArgument = Get.arguments[0];
+    controller.expenseEntity = Get.arguments[1] ?? controller.expenseEntity;
+
     return Scaffold(
       floatingActionButton:
           _floatActionButton(context, plannedExpensesArgument),
@@ -30,14 +31,20 @@ class ExpenseFormView extends GetView<ExpenseFormController> {
       child: const Icon(Icons.save_outlined),
       onPressed: () async {
         try {
-          await controller
-              .saveExpenseLocalDataSource(plannedExpenseArgument.id!);
+          controller.expenseEntity.id == null
+              ? await controller
+                  .saveExpenseLocalDataSource(plannedExpenseArgument.id!)
+              : await controller
+                  .updateExpenseLocalDataSource(plannedExpenseArgument.id!);
+
           Get.back();
           showDialog(
             context: context,
             builder: (context) {
-              return const SucessAlert(
-                title: 'Salvo com sucesso!',
+              return SucessAlert(
+                title: controller.expenseEntity.id == null
+                    ? 'Salvo com sucesso!'
+                    : 'Editado com sucesso!',
               );
             },
           );
@@ -50,7 +57,9 @@ class ExpenseFormView extends GetView<ExpenseFormController> {
 
   AppBar _appBar() {
     return AppBar(
-      title: const Text('Novo Gasto'),
+      title: Text(
+        controller.expenseEntity.id == null ? 'Novo Gasto' : 'Editando Gasto',
+      ),
     );
   }
 
@@ -72,6 +81,7 @@ class ExpenseFormView extends GetView<ExpenseFormController> {
 
   TextFormFieldWidget _nameTexFormField() {
     return TextFormFieldWidget(
+      initialValue: controller.expenseEntity.name,
       labelText: 'Nome',
       onChanged: (value) {
         controller.expenseEntity.name = value;
@@ -81,6 +91,7 @@ class ExpenseFormView extends GetView<ExpenseFormController> {
 
   TextFormFieldWidget _valueTextFormField() {
     return TextFormFieldWidget(
+      initialValue: controller.expenseEntity.value.toString(),
       labelText: 'Valor',
       textInputType: TextInputType.number,
       inputFormatters: [controller.currecyFormat],
@@ -94,6 +105,7 @@ class ExpenseFormView extends GetView<ExpenseFormController> {
 
   DropDownButtonFormFieldWidget _dropDownButtonFormField() {
     return DropDownButtonFormFieldWidget(
+      dropDownValue: controller.expenseEntity.paymentType,
       labelText: 'Tipo de Pagamento',
       onChanged: (value) {
         controller.expenseEntity.paymentType = value;
