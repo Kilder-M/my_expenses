@@ -5,6 +5,7 @@ import 'package:my_expenses/app/domain/entities/planned_expenses_entity.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/expenses_controller.dart';
 import 'package:my_expenses/app/presentation/widgets/expense_card_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/remainder_and_wage_and_amount_card_widget.dart';
+import 'package:my_expenses/app/presentation/widgets/sucess_alert_widget.dart';
 
 class ExpensesView extends GetView<ExpensesController> {
   const ExpensesView({super.key});
@@ -25,7 +26,7 @@ class ExpensesView extends GetView<ExpensesController> {
       PlannedExpensesEntity plannedExpenseArgument) {
     return FloatingActionButton(
       onPressed: () {
-        Get.toNamed('/expense-form', arguments: [plannedExpenseArgument,null]);
+        Get.toNamed('/expense-form', arguments: [plannedExpenseArgument, null]);
       },
       mini: true,
       child: const Icon(Icons.add),
@@ -88,14 +89,38 @@ class ExpensesView extends GetView<ExpensesController> {
   }
 
   Widget _subtitle() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
-      child: Text(
-        'Lista de Gastos',
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'Lista de Gastos',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Row(
+              children: [
+                Obx(
+                  () => Text(
+                    '${controller.payedExpenseLenght.value}/${controller.expensesList.length} ',
+                    style: const TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                const Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -122,23 +147,35 @@ class ExpensesView extends GetView<ExpensesController> {
                     var switchValue = expense.isPayed.obs;
                     return Obx(
                       () => ExpenseCardWidget(
-                        onTap: () {
-                          Get.toNamed('/expense-form',
-                              arguments: [plannedExpenseArgument,expense]);
-                        },
                         iconColor: Colors.orange,
                         paymentForm: expense.paymentType,
                         value: expense.value,
                         statusIcon: Icons.currency_exchange_outlined,
                         subtitle: expense.paymentType,
                         title: expense.name,
-                        switchOnChanged: (value) async {
-                          await controller
-                              .updateExpenseStatusToPayedLocalDataSource(
-                                  expense);
-                          switchValue.value = expense.isPayed;
-                        },
+                        dismissibleKey: Key(expense.name),
                         switchValue: switchValue.value,
+                        switchOnChanged: (value) async {
+                          expense.isPayed = value;
+                          await controller
+                              .updateExpenseStatusLocalDataSource(expense);
+                          switchValue.value = expense.isPayed;
+                          controller.getPayedExpenseLenght();
+                        },
+                        onTap: () {
+                          Get.toNamed('/expense-form',
+                              arguments: [plannedExpenseArgument, expense]);
+                        },
+                        onDismissed: (direction) async {
+                          await controller.deleteExpenseUseCase(expense);
+                          await controller.getExpenseListById(plannedExpenseArgument.id!);
+                          showDialog(
+                            context: context,
+                            builder: ((context) => const SucessAlert(
+                                  title: 'Deletado com sucesso!',
+                                )),
+                          );
+                        },
                       ),
                     );
                   }),
