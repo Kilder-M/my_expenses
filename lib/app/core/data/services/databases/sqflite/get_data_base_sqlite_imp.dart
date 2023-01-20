@@ -1,5 +1,5 @@
+import 'package:my_expenses/app/core/data/services/databases/sqflite/sqflite_script.dart';
 import 'package:my_expenses/app/core/domain/services/database/get_data_base.dart';
-import 'package:my_expenses/app/core/utils/sqflite_script.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
