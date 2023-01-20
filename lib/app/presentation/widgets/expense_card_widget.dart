@@ -7,8 +7,10 @@ class ExpenseCardWidget extends StatelessWidget {
   final IconData statusIcon;
   final Color iconColor;
   final bool switchValue;
+  final Key dismissibleKey;
   final void Function()? onTap;
   final void Function(bool)? switchOnChanged;
+  final Function(DismissDirection)? onDismissed;
 
   const ExpenseCardWidget({
     super.key,
@@ -20,25 +22,29 @@ class ExpenseCardWidget extends StatelessWidget {
     required this.paymentForm,
     this.onTap,
     this.switchOnChanged,
-    required this.switchValue,
+    required this.switchValue, required this.dismissibleKey, this.onDismissed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0.5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25),
-      ),
-      shadowColor: Colors.deepPurple,
-      margin: const EdgeInsets.all(2),
-      child: ListTile(
-        subtitle: subtitleStatus(),
-        leading: leadingIcon(),
-        onTap: onTap,
-        minLeadingWidth: 20,
-        trailing: trailingColumn(),
-        title: Text(title),
+    return Dismissible(
+      onDismissed: onDismissed,
+      key: dismissibleKey,
+      child: Card(
+        elevation: 0.5,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
+        shadowColor: Colors.deepPurple,
+        margin: const EdgeInsets.all(2),
+        child: ListTile(
+          subtitle: subtitleStatus(),
+          leading: leadingIcon(),
+          onTap: onTap,
+          minLeadingWidth: 20,
+          trailing: trailingColumn(),
+          title: Text(title),
+        ),
       ),
     );
   }
