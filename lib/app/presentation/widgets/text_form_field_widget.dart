@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 class TextFormFieldWidget extends StatelessWidget {
   final double? width, height;
   final String labelText;
+  final String? initialValue;
   final bool? enable, showCursor;
   final bool readOnly;
   final Widget? prefixIcon, suffixIcon;
@@ -28,6 +29,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.suffixIcon,
     this.showCursor,
     this.readOnly = false,
+    this.initialValue,
   });
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class TextFormFieldWidget extends StatelessWidget {
         width: width,
         height: height,
         child: TextFormField(
+          initialValue: initialValue,
           enableInteractiveSelection: false,
           enableIMEPersonalizedLearning: false,
           readOnly: readOnly,
