@@ -11,7 +11,7 @@ class GetExpensesListByIdLocalDataSourceImp implements GetExpensesListByIdDataSo
   Future<List<ExpenseEntity>> call(int id) async {
     final databaseResponse = await _getDataBaseImp.call();
     List<Map<String, dynamic>> queryResponse =
-        await databaseResponse.query('expense',where:'planned_expenses_id = ?',whereArgs: [id]);
+        await databaseResponse.query('expense',where:'planned_expenses_id = ?',whereArgs: [id],orderBy: 'isPayed ASC,value DESC',);
     List<ExpenseDTO> expensesList =
         List.generate(queryResponse.length, (index) {
       var element = queryResponse[index];
