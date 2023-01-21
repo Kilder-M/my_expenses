@@ -12,7 +12,7 @@ class GetPlannedExpensesListLocalDataSourceImp
   Future<List<PlannedExpensesEntity>> call() async {
     final databaseResponse = await _getDataBaseImp();
     List<Map<String, dynamic>> queryResponse =
-        await databaseResponse.query('planned_expenses');
+        await databaseResponse.rawQuery('SELECT * FROM planned_expenses WHERE month LIKE "${DateTime.now().year.toString()}%" ORDER BY month DESC');
     List<PlannedExpensesDTO> plannedExpensesList =
         List.generate(queryResponse.length, (index) {
       var element = queryResponse[index];
