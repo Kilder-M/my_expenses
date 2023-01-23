@@ -10,7 +10,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: bottomNavigationBar(),
+      bottomNavigationBar: _bottomNavigationBar(),
       body: SafeArea(
         bottom: false,
         child: Padding(
@@ -18,9 +18,9 @@ class HomeView extends GetView<HomeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              viewTitle(),
-              toolsSubtitle(),
-              gridView(),
+              _viewTitle(),
+              _toolsSubtitle(),
+              _gridView(),
             ],
           ),
         ),
@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget bottomNavigationBar() {
+  Widget _bottomNavigationBar() {
     return BottomNavigationBar(
       selectedItemColor: Colors.black,
       items: const [
@@ -44,7 +44,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget toolsSubtitle() {
+  Widget _toolsSubtitle() {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: Text(
@@ -57,7 +57,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget gridView() {
+  Widget _gridView() {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -69,13 +69,13 @@ class HomeView extends GetView<HomeController> {
             crossAxisSpacing: 0,
             mainAxisSpacing: 0,
           ),
-          children: gridViewCardList(),
+          children: _gridViewCardList(),
         ),
       ),
     );
   }
 
-  List<Widget> gridViewCardList() {
+  List<Widget> _gridViewCardList() {
     return [
       GestureDetector(
         onTap: () {
@@ -113,7 +113,7 @@ class HomeView extends GetView<HomeController> {
     ];
   }
 
-  Widget viewTitle() {
+  Widget _viewTitle() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Column(
