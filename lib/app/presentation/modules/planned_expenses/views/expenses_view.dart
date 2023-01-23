@@ -140,46 +140,54 @@ class ExpensesView extends GetView<ExpensesController> {
               );
             } else {
               return Obx(
-                () => ListView.builder(
-                  itemCount: controller.expensesList.length,
-                  itemBuilder: ((context, index) {
-                    var expense = controller.expensesList[index];
-                    var switchValue = expense.isPayed.obs;
-                    return Obx(
-                      () => ExpenseCardWidget(
-                        iconColor: Colors.orange,
-                        paymentForm: expense.paymentType,
-                        value: expense.value,
-                        statusIcon: Icons.currency_exchange_outlined,
-                        subtitle: expense.paymentType,
-                        title: expense.name,
-                        dismissibleKey: Key(expense.name),
-                        switchValue: switchValue.value,
-                        switchOnChanged: (value) async {
-                          expense.isPayed = value;
-                          await controller
-                              .updateExpenseStatusLocalDataSource(expense);
-                          switchValue.value = expense.isPayed;
-                          controller.getPayedExpenseLenght();
-                        },
-                        onTap: () {
-                          Get.toNamed('/expense-form',
-                              arguments: [plannedExpenseArgument, expense]);
-                        },
-                        onDismissed: (direction) async {
-                          await controller.deleteExpenseUseCase(expense);
-                          await controller.getExpenseListById(plannedExpenseArgument.id!);
-                          showDialog(
-                            context: context,
-                            builder: ((context) => const SucessAlert(
-                                  title: 'Deletado com sucesso!',
-                                )),
+                () => controller.expensesList.isNotEmpty
+                    ? ListView.builder(
+                        itemCount: controller.expensesList.length,
+                        itemBuilder: ((context, index) {
+                          var expense = controller.expensesList[index];
+                          var switchValue = expense.isPayed.obs;
+                          return Obx(
+                            () => ExpenseCardWidget(
+                              iconColor: Colors.orange,
+                              paymentForm: expense.paymentType,
+                              value: expense.value,
+                              statusIcon: Icons.currency_exchange_outlined,
+                              subtitle: expense.paymentType,
+                              title: expense.name,
+                              dismissibleKey: Key(expense.name),
+                              switchValue: switchValue.value,
+                              switchOnChanged: (value) async {
+                                expense.isPayed = value;
+                                await controller
+                                    .updateExpenseStatusLocalDataSource(
+                                        expense);
+                                switchValue.value = expense.isPayed;
+                                controller.getPayedExpenseLenght();
+                              },
+                              onTap: () {
+                                Get.toNamed('/expense-form', arguments: [
+                                  plannedExpenseArgument,
+                                  expense
+                                ]);
+                              },
+                              onDismissed: (direction) async {
+                                await controller.deleteExpenseUseCase(expense);
+                                await controller.getExpenseListById(
+                                    plannedExpenseArgument.id!);
+                                showDialog(
+                                  context: context,
+                                  builder: ((context) => const SucessAlert(
+                                        title: 'Deletado com sucesso!',
+                                      )),
+                                );
+                              },
+                            ),
                           );
-                        },
+                        }),
+                      )
+                    : const Center(
+                        child: Text('A lista está vazia'),
                       ),
-                    );
-                  }),
-                ),
               );
             }
           }),
