@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_expenses/app/core/routes/app_pages.dart';
 import 'package:my_expenses/app/core/utils/localization_manager_util.dart';
 
-import 'app/routes/app_pages.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
