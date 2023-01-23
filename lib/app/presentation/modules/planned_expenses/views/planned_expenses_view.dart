@@ -70,54 +70,59 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
 
   Widget _listViewBuilder() {
     return Obx(
-      () => ListView.builder(
-        itemCount: controller.plannedExpenseList.length,
-        itemBuilder: ((context, index) {
-          var plannedExpense = controller.plannedExpenseList[index];
-          return PlannedExpensesCardWidget(
-            iconColor: Colors.orange,
-            onTapIcon: () {
-              showDialog(
-                context: context,
-                builder: ((context) => AlertDialog(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                      title: const Text('Você deseja excluir ?'),
-                      actions: [
-                        TextButton(
-                          onPressed: Get.back,
-                          child: const Text('Não'),
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            await controller
-                                .deletePlannedExpensesLocalDataSource(
-                                    plannedExpense);
-                            Get.back();
-                            showDialog(
-                              context: context,
-                              builder: ((context) => const SucessAlert(
-                                    title: 'Gasto mensal excluído com sucesso!',
-                                  )),
-                            );
-                          },
-                          child: const Text('Sim'),
-                        )
-                      ],
-                    )),
-              );
-            },
-            onTap: () {
-              Get.toNamed('/expenses', arguments: plannedExpense);
-            },
-            statusIcon: Icons.timer_outlined,
-            status: 'Em Andamento',
-            title: DateTimeManagerUtil.getYearAndMonth(
-              plannedExpense.month,
+      () => controller.plannedExpenseList.isNotEmpty
+          ? ListView.builder(
+              itemCount: controller.plannedExpenseList.length,
+              itemBuilder: ((context, index) {
+                var plannedExpense = controller.plannedExpenseList[index];
+                return PlannedExpensesCardWidget(
+                  iconColor: Colors.orange,
+                  onTapIcon: () {
+                    showDialog(
+                      context: context,
+                      builder: ((context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25)),
+                            title: const Text('Você deseja excluir ?'),
+                            actions: [
+                              TextButton(
+                                onPressed: Get.back,
+                                child: const Text('Não'),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  await controller
+                                      .deletePlannedExpensesLocalDataSource(
+                                          plannedExpense);
+                                  Get.back();
+                                  showDialog(
+                                    context: context,
+                                    builder: ((context) => const SucessAlert(
+                                          title:
+                                              'Gasto mensal excluído com sucesso!',
+                                        )),
+                                  );
+                                },
+                                child: const Text('Sim'),
+                              )
+                            ],
+                          )),
+                    );
+                  },
+                  onTap: () {
+                    Get.toNamed('/expenses', arguments: plannedExpense);
+                  },
+                  statusIcon: Icons.timer_outlined,
+                  status: 'Em Andamento',
+                  title: DateTimeManagerUtil.getYearAndMonth(
+                    plannedExpense.month,
+                  ),
+                );
+              }),
+            )
+          : const Center(
+              child: Text('A lista está vazia'),
             ),
-          );
-        }),
-      ),
     );
   }
 }
