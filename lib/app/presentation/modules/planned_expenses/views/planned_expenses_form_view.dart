@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_expenses/app/core/utils/show_date_picker_util.dart';
@@ -14,15 +13,38 @@ class PlannedExpensesFormView extends GetView<PlannedExpensesFormController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: _floatActionButton(context),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
-      appBar: _appBar(),
-      body: _body(context),
-    );
+        floatingActionButton:
+            _FloatActionButton(controller: controller, context: context),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        appBar: AppBar(
+          title: const Text('Novo Gasto Mensal'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              _DateTextFormField(
+                controller: controller,
+              ),
+              _WageTextFormFiled(controller: controller),
+            ],
+          ),
+        ));
   }
+}
 
-  FloatingActionButton _floatActionButton(BuildContext context) {
+class _FloatActionButton extends StatelessWidget {
+  const _FloatActionButton({
+    required this.controller,
+    required this.context,
+  });
+
+  final PlannedExpensesFormController controller;
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
     return FloatingActionButton(
       mini: true,
       child: const Icon(Icons.save_outlined),
@@ -32,59 +54,33 @@ class PlannedExpensesFormView extends GetView<PlannedExpensesFormController> {
             controller.plannedExpensesEntity,
           );
           Get.back();
-          showDialog(
-            context: context,
-            builder: (context) {
-              return const SucessAlert(
-                title: 'Salvo com sucesso!',
-              );
-            },
-          );
+          if (context.mounted) {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return const SucessAlert(
+                  title: 'Salvo com sucesso!',
+                );
+              },
+            );
+          }
         } on Exception catch (e) {
           throw Exception(e);
         }
       },
     );
   }
+}
 
-  AppBar _appBar() {
-    return AppBar(
-      title: const Text('Novo Gasto Mensal'),
-    );
-  }
+class _SuffixIcon extends StatelessWidget {
+  const _SuffixIcon({
+    required this.controller,
+  });
 
-  Widget _body(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          _dateTextFormField(context),
-          _wageTextFormField(),
-        ],
-      ),
-    );
-  }
+  final PlannedExpensesFormController controller;
 
-  TextFormFieldWidget _dateTextFormField(BuildContext context) {
-    return TextFormFieldWidget(
-      readOnly: true,
-      textFormFieldController: controller.dateTextFormFieldController,
-      enable: true,
-      textInputType: TextInputType.none,
-      labelText: 'Data',
-      suffixIcon: _suffixiIcon(),
-      onTap: () async {
-        final dateTimeResponse = await ShowDatePickerUtil.getDateTime(context);
-        controller.dateTextFormFieldController.text =
-            ShowDatePickerUtil.formatedDateTime(dateTimeResponse) ??
-                controller.dateTextFormFieldController.text;
-        controller.plannedExpensesEntity.month = dateTimeResponse!;
-      },
-    );
-  }
-
-  Widget _suffixiIcon() {
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         controller.dateTextFormFieldController.clear();
@@ -96,8 +92,17 @@ class PlannedExpensesFormView extends GetView<PlannedExpensesFormController> {
       ),
     );
   }
+}
 
-  TextFormFieldWidget _wageTextFormField() {
+class _WageTextFormFiled extends StatelessWidget {
+  const _WageTextFormFiled({
+    required this.controller,
+  });
+
+  final PlannedExpensesFormController controller;
+
+  @override
+  Widget build(BuildContext context) {
     return TextFormFieldWidget(
       labelText: 'Ganho Mensal',
       textFormFieldController: controller.valueTextFormFieldController,
@@ -106,6 +111,33 @@ class PlannedExpensesFormView extends GetView<PlannedExpensesFormController> {
       onChanged: (value) {
         controller.plannedExpensesEntity.wage = double.parse(
             controller.currecyFormat.getUnformattedValue().toString());
+      },
+    );
+  }
+}
+
+class _DateTextFormField extends StatelessWidget {
+  final PlannedExpensesFormController controller;
+
+  const _DateTextFormField({required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormFieldWidget(
+      readOnly: true,
+      textFormFieldController: controller.dateTextFormFieldController,
+      enable: true,
+      textInputType: TextInputType.none,
+      labelText: 'Data',
+      suffixIcon: _SuffixIcon(
+        controller: controller,
+      ),
+      onTap: () async {
+        final dateTimeResponse = await ShowDatePickerUtil.getDateTime(context);
+        controller.dateTextFormFieldController.text =
+            ShowDatePickerUtil.formatedDateTime(dateTimeResponse) ??
+                controller.dateTextFormFieldController.text;
+        controller.plannedExpensesEntity.month = dateTimeResponse!;
       },
     );
   }
