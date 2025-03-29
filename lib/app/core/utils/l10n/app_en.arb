@@ -1,0 +1,126 @@
+{
+    "language" : "english",
+    "@language" : {
+        "description": " The current language"
+    },
+    "language_text" : "Language",
+    "@language_text" : {
+        "description": " Language text"
+    },
+    "workout": "Workout",
+    "@workout": {
+        "description": "Workout text"
+    },
+    "new_workout": "New Workout",
+    "@new_workout": {
+        "description": "Workout new text"
+    },
+    "home" : "Home",
+    "@home": {
+        "description": "Home text"
+    },
+    "profile" : "Profile",
+    "@profile": {
+        "description": "profile text"
+    },
+    "settings" : "Settings",
+    "@settings": {
+        "description": "settings text"
+    },
+     "monday" : "Monday",
+    "@monday": {
+        "description": "week day"
+    },
+     "tuesday" : "Tuesday",
+    "@tuesday": {
+        "description": "week day"
+    },
+     "wednesday" : "Wednesday",
+    "@wednesday": {
+        "description": "week day"
+    },
+     "thurday" : "Thursday",
+    "@thurday": {
+        "description": "week day"
+    },
+     "friday" : "Friday",
+    "@friday": {
+        "description": "week day"
+    },
+     "saturday" : "Saturday",
+    "@saturday": {
+        "description": "week day"
+    },
+     "sunday" : "Sunday",
+    "@sunday": {
+        "description": "settings text"
+    },
+    "sets" : "Sets",
+    "@sets": {
+        "description": "Sets text"
+    },
+    "reps" : "Reps",
+    "@reps": {
+        "description": "Reps text"
+    },
+    "rest_time" : "Rest time",
+    "@rest_time": {
+        "description": "Rest time text"
+    },
+    "name" : "Name",
+    "@name": {
+        "description": "Name text"
+    },
+    "weight" : "Weight",
+    "@weight": {
+        "description": "weight text"
+    },
+    "observations" : "Observations",
+    "@observations": {
+        "description": "observations text"
+    },
+    "save" : "Save",
+    "@save": {
+        "description": "save text"
+    },
+    "picture": "Picture",
+    "@picture": {
+        "description": "picture text"
+    },
+    "machine": "Machine",
+    "@machine": {
+        "description": "machine text"
+    },
+     "delete": "Delete",
+    "@delete": {
+        "description": "delete text"
+    },
+    "edit": "Edit",
+    "@edit": {
+        "description": "edit text"
+    },
+    "what_would_you_like_to_do": "What would you like to do ?",
+    "@what_would_you_like_to_do": {
+        "description": "What would you like to do ? text"
+    },
+    "dark_mode": "Dark Mode",
+    "@dark_mode": {
+        "description": "Dark mode text"
+    },
+    "required": "Required",
+    "@required": {
+        "description": "required text"
+    },
+    "invalid": "Invalid",
+    "@invalid": {
+        "description": "Invalid text"
+    },
+    "max_length_erro_text": "Max length is",
+    "@max_length_erro_text": {
+        "description": "Max length erro text"
+    },
+    "empty": "Empty",
+    "@empty": {
+        "description": "Empty text"
+    }
+}
