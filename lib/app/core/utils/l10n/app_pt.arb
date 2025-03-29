@@ -29,5 +29,14 @@
     "required": "Obrigatório",
     "invalid": "Inválido",
     "max_length_erro_text": "Tamanho máx é",
-    "empty": "Vazio"
+    "empty": "Vazio",
+    "manage_your": "Organize Suas",
+    "finances": "Finances",
+    "monthly_expenses": "Gastos Mensais",
+    "tools": "Ferramentas",
+    "profile": "Profile",
+    "home": "Inicio"
+
+    
+    
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_expenses/app/presentation/widgets/grid_view_card_widget.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -9,55 +9,101 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: _bottomNavigationBar(),
+    return const Scaffold(
+      bottomNavigationBar: _BottomNavigationBar(),
       body: SafeArea(
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+          padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _viewTitle(),
-              _toolsSubtitle(),
-              _gridView(),
+              _ViewTitle(),
+              _ToolsSubtitle(),
+              _GridView(),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _bottomNavigationBar() {
+class _BottomNavigationBar extends StatelessWidget {
+  const _BottomNavigationBar();
+
+  @override
+  Widget build(BuildContext context) {
     return BottomNavigationBar(
       selectedItemColor: Colors.black,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
+          icon: const Icon(Icons.home),
+          label: AppLocalizations.of(context)!.home,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Perfil',
+          icon: const Icon(Icons.person),
+          label: AppLocalizations.of(context)!.profile,
         ),
       ],
     );
   }
+}
 
-  Widget _toolsSubtitle() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+class _ToolsSubtitle extends StatelessWidget {
+  const _ToolsSubtitle();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
       child: Text(
-        'Ferramentas',
-        style: TextStyle(
+        AppLocalizations.of(context)!.tools,
+        style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),
       ),
     );
   }
+}
 
-  Widget _gridView() {
+class _ViewTitle extends StatelessWidget {
+  const _ViewTitle();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.manage_your,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w300,
+            ),
+          ),
+          Text(
+            AppLocalizations.of(context)!.finances,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 28,
+            ),
+            textAlign: TextAlign.left,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _GridView extends StatelessWidget {
+  const _GridView();
+
+  @override
+  Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -69,73 +115,23 @@ class HomeView extends GetView<HomeController> {
             crossAxisSpacing: 0,
             mainAxisSpacing: 0,
           ),
-          children: _gridViewCardList(),
+          children: _gridViewCardList(context),
         ),
       ),
     );
   }
 
-  List<Widget> _gridViewCardList() {
+  List<Widget> _gridViewCardList(BuildContext context) {
     return [
       GestureDetector(
-        onTap: () {
-          Get.toNamed('planned-expenses');
-        },
-        child: const GridViewCard(
+        child: GridViewCard(
           icon: Icons.calendar_month_outlined,
-          cardName: 'Gastos Mensais',
+          cardName: AppLocalizations.of(context)!.monthly_expenses,
+          onTap: () {
+            Get.toNamed('planned-expenses');
+          },
         ),
       ),
-      const GridViewCard(
-        icon: Icons.savings_outlined,
-        cardName: 'Gastos Essenciais',
-      ),
-      const GridViewCard(
-        icon: Icons.emergency_outlined,
-        cardName: 'Reserva de Emergência',
-      ),
-      const GridViewCard(
-        icon: Icons.question_mark_outlined,
-        cardName: 'Example',
-      ),
-      const GridViewCard(
-        icon: Icons.question_mark_outlined,
-        cardName: 'Example',
-      ),
-      const GridViewCard(
-        icon: Icons.question_mark_outlined,
-        cardName: 'Example',
-      ),
-      const GridViewCard(
-        icon: Icons.question_mark_outlined,
-        cardName: 'Example',
-      ),
     ];
-  }
-
-  Widget _viewTitle() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text(
-            'Organize suas',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-          Text(
-            'Finanças',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 28,
-            ),
-            textAlign: TextAlign.left,
-          ),
-        ],
-      ),
-    );
   }
 }

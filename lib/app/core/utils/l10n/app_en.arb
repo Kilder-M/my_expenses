@@ -122,5 +122,30 @@
     "empty": "Empty",
     "@empty": {
         "description": "Empty text"
+    },
+    "manage_your": "Manage Your",
+    "@manage_your": {
+        "description": "Manage Your text"
+    },
+    "finances": "Finances",
+    "@finances": {
+        "description": "Manage Your text"
+    },
+    "monthly_expenses": "Monthly Expenses",
+    "@monthly_expenses": {
+        "description": "Monthly Expenses text"
+    },
+     "tools": "Tools",
+    "@tools": {
+        "description": "tools text"
+    },
+    "profile": "Profile",
+    "@profile": {
+        "description": "profile text"
+    },
+    "home": "Home",
+    "@home": {
+        "description": "home text"
     }
+   
 }
