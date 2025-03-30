@@ -45,7 +45,21 @@
     "new_monthly_expenses": "Novo gasto mensal",
     "save_successfully": "Salvo com sucesso!",
     "monthly_earning": "Ganho mensal",
-    "date": "Data"
+    "date": "Data",
+    "edited_successfully": "Editado com sucesso!",
+    "new_expense": "Novo gasto",
+    "payment_form": "Tipo de pagamento",
+    "value": "Valor",
+    "expenses": "Gastos",
+    "remainder": "Sobra",
+    "deleted_successfully": "Deletado com sucesso!",
+    "expenses_list": "Lista de gastos",
+
+
+    "editing_expense": "Editando gasto"
+
+
+
 
 
 
