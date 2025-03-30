@@ -4,6 +4,7 @@ import 'package:my_expenses/app/core/utils/show_date_picker_util.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/planned_expenses_form_controller.dart';
 import 'package:my_expenses/app/presentation/widgets/sucess_alert_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/text_form_field_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class PlannedExpensesFormView extends GetView<PlannedExpensesFormController> {
   const PlannedExpensesFormView({
@@ -17,7 +18,7 @@ class PlannedExpensesFormView extends GetView<PlannedExpensesFormController> {
             _FloatActionButton(controller: controller, context: context),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         appBar: AppBar(
-          title: const Text('Novo Gasto Mensal'),
+          title:  Text(AppLocalizations.of(context)!.new_monthly_expenses),
         ),
         body: Padding(
           padding: const EdgeInsets.all(20),
@@ -58,8 +59,8 @@ class _FloatActionButton extends StatelessWidget {
             showDialog(
               context: context,
               builder: (context) {
-                return const SucessAlert(
-                  title: 'Salvo com sucesso!',
+                return  SucessAlert(
+                  title: AppLocalizations.of(context)!.saved_successfully,
                 );
               },
             );
@@ -104,7 +105,7 @@ class _WageTextFormFiled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormFieldWidget(
-      labelText: 'Ganho Mensal',
+      labelText: AppLocalizations.of(context)!.monthly_earning,
       textFormFieldController: controller.valueTextFormFieldController,
       textInputType: TextInputType.number,
       inputFormatters: [controller.currecyFormat],
@@ -128,7 +129,7 @@ class _DateTextFormField extends StatelessWidget {
       textFormFieldController: controller.dateTextFormFieldController,
       enable: true,
       textInputType: TextInputType.none,
-      labelText: 'Data',
+      labelText: AppLocalizations.of(context)!.date,
       suffixIcon: _SuffixIcon(
         controller: controller,
       ),

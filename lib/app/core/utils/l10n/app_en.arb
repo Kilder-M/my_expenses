@@ -146,6 +146,46 @@
     "home": "Home",
     "@home": {
         "description": "home text"
+    },
+    "no": "No",
+    "@no": {
+        "description": "No text"
+    },
+    "do_you_want_to_delete": "Do you want to delete?",
+    "@do_you_want_to_delete": {
+        "description": "Do you want to delete text"
+    },
+    "monthly_expenses_was_deleted_successfully": "Monthly expenses was deleted successfully",
+    "@monthly_expenses_was_deleted_successfully": {
+        "description": "Monthly expenses was deleted successfully text"
+    },
+    "yes": "Yes",
+    "@yes": {
+        "description": "yes text"
+    },
+    "in_progress": "In Progress",
+    "@in_progress": {
+        "description": "In Progress text"
+    },
+    "the_list_is_empty": "The list is empty",
+    "@the_list_is_empty": {
+        "description": "The list is empty text"
+    },
+    "new_monthly_expenses": "New monthly expenses",
+    "@new_monthly_expenses": {
+        "description": "New monthly expenses text"
+    },
+    "saved_successfully": "Saved successfully!",
+    "@saved_successfully": {
+        "description": "Saved successfully text"
+    },
+    "monthly_earning": "Monthly earning",
+    "@monthly_earning": {
+        "description": "Monthly earning text"
+    },
+    "date": "Date",
+    "@date": {
+        "description": "Date text"
     }
    
 }

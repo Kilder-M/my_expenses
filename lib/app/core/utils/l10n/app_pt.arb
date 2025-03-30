@@ -31,11 +31,31 @@
     "max_length_erro_text": "Tamanho máx é",
     "empty": "Vazio",
     "manage_your": "Organize Suas",
-    "finances": "Finances",
+    "finances": "Finanças",
     "monthly_expenses": "Gastos Mensais",
     "tools": "Ferramentas",
-    "profile": "Profile",
-    "home": "Inicio"
+    "profile": "Perfil",
+    "home": "Inicio",
+    "no": "Não",
+    "do_you_want_to_delete": "Você deseja excluir?",
+    "monthly_expenses_was_deleted": "Gasto mensal excluído com sucesso!",
+    "yes": "Yes",
+    "in_progress": "Em andamento",
+    "the_list_is_empty": "A lista está vazia",
+    "new_monthly_expenses": "Novo gasto mensal",
+    "save_successfully": "Salvo com sucesso!",
+    "monthly_earning": "Ganho mensal",
+    "date": "Data"
+
+
+
+
+
+
+
+
+
+
 
     
     

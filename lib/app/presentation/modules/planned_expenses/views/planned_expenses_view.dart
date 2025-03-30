@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:my_expenses/app/core/utils/date_time_manager_util.dart';
 import 'package:my_expenses/app/presentation/widgets/planned_expenses_card_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/sucess_alert_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 import '../controllers/planned_expenses_controller.dart';
 
@@ -12,15 +13,54 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: _floatingActionButton(),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterFloat,
-      appBar: _appBar(context),
-      body: _body(),
+      floatingActionButton: const _FloatingActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context)!.monthly_expenses,
+        ),
+        // actions: [
+        // IconButton(
+        //   icon: const Icon(Icons.filter_list_outlined),
+        //   onPressed: () {},
+        // ),
+        // ],
+      ),
+      body: _Body(controller: controller),
     );
   }
+}
 
-  FloatingActionButton _floatingActionButton() {
+class _Body extends StatelessWidget {
+  const _Body({
+    required this.controller,
+  });
+
+  final PlannedExpensesController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(4, 8, 4, 0),
+      child: FutureBuilder(
+        future: controller.getPlannedExpensesLocalDataSource(),
+        builder: ((context, snapshot) {
+          if (!snapshot.hasData) {
+            return const _CircularProgressIndicator();
+          } else {
+            return _ListViewBuilder(controller: controller);
+          }
+        }),
+      ),
+    );
+  }
+}
+
+class _FloatingActionButton extends StatelessWidget {
+  const _FloatingActionButton();
+
+  @override
+  Widget build(BuildContext context) {
     return FloatingActionButton(
       mini: true,
       onPressed: () {
@@ -29,46 +69,17 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
       child: const Icon(Icons.add),
     );
   }
+}
 
-  AppBar _appBar(BuildContext context) {
-    return AppBar(
-      title: const Text(
-        'Gastos Mensais',
-      ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.filter_list_outlined),
-          onPressed: () {},
-        ),
-      ],
-    );
-  }
+class _ListViewBuilder extends StatelessWidget {
+  const _ListViewBuilder({
+    required this.controller,
+  });
 
-  Padding _body() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(4, 8, 4, 0),
-      child: FutureBuilder(
-        future: controller.getPlannedExpensesLocalDataSource(),
-        builder: ((context, snapshot) {
-          if (!snapshot.hasData) {
-            return _circularProgressIndicator();
-          } else {
-            return _listViewBuilder();
-          }
-        }),
-      ),
-    );
-  }
+  final PlannedExpensesController controller;
 
-  Center _circularProgressIndicator() {
-    return const Center(
-      child: CircularProgressIndicator(
-        strokeWidth: 1.5,
-      ),
-    );
-  }
-
-  Widget _listViewBuilder() {
+  @override
+  Widget build(BuildContext context) {
     return Obx(
       () => controller.plannedExpenseList.isNotEmpty
           ? ListView.builder(
@@ -83,11 +94,12 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
                       builder: ((context) => AlertDialog(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(25)),
-                            title: const Text('Você deseja excluir ?'),
+                            title: Text(AppLocalizations.of(context)!
+                                .do_you_want_to_delete),
                             actions: [
                               TextButton(
                                 onPressed: Get.back,
-                                child: const Text('Não'),
+                                child: Text(AppLocalizations.of(context)!.no),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -95,15 +107,17 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
                                       .deletePlannedExpensesLocalDataSource(
                                           plannedExpense);
                                   Get.back();
-                                  showDialog(
-                                    context: context,
-                                    builder: ((context) => const SucessAlert(
-                                          title:
-                                              'Gasto mensal excluído com sucesso!',
-                                        )),
-                                  );
+                                  if (context.mounted) {
+                                    showDialog(
+                                      context: context,
+                                      builder: ((context) => SucessAlert(
+                                            title: AppLocalizations.of(context)!
+                                                .monthly_expenses_was_deleted_successfully,
+                                          )),
+                                    );
+                                  }
                                 },
-                                child: const Text('Sim'),
+                                child: Text(AppLocalizations.of(context)!.yes),
                               )
                             ],
                           )),
@@ -113,16 +127,29 @@ class PlannedExpensesView extends GetView<PlannedExpensesController> {
                     Get.toNamed('/expenses', arguments: plannedExpense);
                   },
                   statusIcon: Icons.timer_outlined,
-                  status: 'Em Andamento',
+                  status: AppLocalizations.of(context)!.in_progress,
                   title: DateTimeManagerUtil.getYearAndMonth(
                     plannedExpense.month,
                   ),
                 );
               }),
             )
-          : const Center(
-              child: Text('A lista está vazia'),
+          : Center(
+              child: Text(AppLocalizations.of(context)!.the_list_is_empty),
             ),
+    );
+  }
+}
+
+class _CircularProgressIndicator extends StatelessWidget {
+  const _CircularProgressIndicator();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: CircularProgressIndicator(
+        strokeWidth: 1.5,
+      ),
     );
   }
 }
