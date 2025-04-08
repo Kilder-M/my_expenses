@@ -78,8 +78,8 @@ class _DropDownButtonFormField extends StatelessWidget {
       items: controller.paymentypeList
           .map(
             (e) => DropdownMenuItem<String>(
-              value: e.paymentTypeName,
-              child: Text(e.paymentTypeName),
+              value: controller.getPaymentTypeName(context, e),
+              child: Text(controller.getPaymentTypeName(context, e),),
             ),
           )
           .toList(),

@@ -39,7 +39,7 @@
     "no": "Não",
     "do_you_want_to_delete": "Você deseja excluir?",
     "monthly_expenses_was_deleted": "Gasto mensal excluído com sucesso!",
-    "yes": "Yes",
+    "yes": "Sim",
     "in_progress": "Em andamento",
     "the_list_is_empty": "A lista está vazia",
     "new_monthly_expenses": "Novo gasto mensal",
@@ -54,8 +54,10 @@
     "remainder": "Sobra",
     "deleted_successfully": "Deletado com sucesso!",
     "expenses_list": "Lista de gastos",
-
-
+    "debit": "Débito",
+    "money": "Dinheiro",
+    "pix": "Pix",
+    "credit": "Crédito",
     "editing_expense": "Editando gasto"
 
 

@@ -219,6 +219,22 @@
     "@remainder": {
         "description": "remainder text"
     },
+    "debit": "Debit",
+    "@debit": {
+        "description": "debit text"
+    },
+    "money": "Money",
+    "@money": {
+        "description": "Money text"
+    },
+    "pix": "Pix",
+    "@pix": {
+        "description": "pix text"
+    },
+    "credit": "Credit",
+    "@credit": {
+        "description": "credit text"
+    },
     "date": "Date",
     "@date": {
         "description": "Date text"

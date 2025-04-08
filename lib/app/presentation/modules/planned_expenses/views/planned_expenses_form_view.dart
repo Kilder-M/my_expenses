@@ -18,7 +18,7 @@ class PlannedExpensesFormView extends GetView<PlannedExpensesFormController> {
             _FloatActionButton(controller: controller, context: context),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         appBar: AppBar(
-          title:  Text(AppLocalizations.of(context)!.new_monthly_expenses),
+          title: Text(AppLocalizations.of(context)!.new_monthly_expenses),
         ),
         body: Padding(
           padding: const EdgeInsets.all(20),
@@ -59,7 +59,7 @@ class _FloatActionButton extends StatelessWidget {
             showDialog(
               context: context,
               builder: (context) {
-                return  SucessAlert(
+                return SucessAlert(
                   title: AppLocalizations.of(context)!.saved_successfully,
                 );
               },
@@ -134,11 +134,14 @@ class _DateTextFormField extends StatelessWidget {
         controller: controller,
       ),
       onTap: () async {
-        final dateTimeResponse = await ShowDatePickerUtil.getDateTime(context);
+        final DateTime? dateTimeResponse =
+            await ShowDatePickerUtil.getDateTime(context);
         controller.dateTextFormFieldController.text =
             ShowDatePickerUtil.formatedDateTime(dateTimeResponse) ??
                 controller.dateTextFormFieldController.text;
-        controller.plannedExpensesEntity.month = dateTimeResponse!;
+        if (dateTimeResponse != null) {
+          controller.plannedExpensesEntity.month = dateTimeResponse;
+        }
       },
     );
   }
