@@ -1,0 +1,78 @@
+{   
+    "language" : "portugues",
+    "language_text" : "Idioma",
+    "workout" : "Treino",
+    "new_workout" : "Novo Treino",
+    "home" : "inicio",
+    "profile" : "Perfil",
+    "settings" : "Configurações",
+    "monday" : "Segunda",
+    "tuesday" : "Terça",
+    "wednesday" : "Quarta",
+    "thurday" : "Quinta",
+    "friday" : "Sexta",
+    "saturday" : "Sábado",
+    "sunday" : "Domingo",
+    "sets" : "Series",
+    "reps" : "Repetições",
+    "rest_time" : "Descanso",
+    "name" : "Nome",
+    "observations" : "Observação",
+    "weight" : "Peso",
+    "save" : "Salvar",
+    "picture": "Foto",
+    "machine": "Máquina",
+    "delete": "Deletar",
+    "edit": "Editar",
+    "what_would_you_like_to_do": "O que deseja fazer ?",
+    "dark_mode": "Modo Escuro",
+    "required": "Obrigatório",
+    "invalid": "Inválido",
+    "max_length_erro_text": "Tamanho máx é",
+    "empty": "Vazio",
+    "manage_your": "Organize Suas",
+    "finances": "Finanças",
+    "monthly_expenses": "Gastos Mensais",
+    "tools": "Ferramentas",
+    "profile": "Perfil",
+    "home": "Inicio",
+    "no": "Não",
+    "do_you_want_to_delete": "Você deseja excluir?",
+    "monthly_expenses_was_deleted": "Gasto mensal excluído com sucesso!",
+    "yes": "Sim",
+    "in_progress": "Em andamento",
+    "the_list_is_empty": "A lista está vazia",
+    "new_monthly_expenses": "Novo gasto mensal",
+    "save_successfully": "Salvo com sucesso!",
+    "monthly_earning": "Ganho mensal",
+    "date": "Data",
+    "edited_successfully": "Editado com sucesso!",
+    "new_expense": "Novo gasto",
+    "payment_form": "Tipo de pagamento",
+    "value": "Valor",
+    "expenses": "Gastos",
+    "remainder": "Sobra",
+    "deleted_successfully": "Deletado com sucesso!",
+    "expenses_list": "Lista de gastos",
+    "debit": "Débito",
+    "money": "Dinheiro",
+    "pix": "Pix",
+    "credit": "Crédito",
+    "editing_expense": "Editando gasto"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+}

@@ -1,11 +1,9 @@
 enum PaymentTypeEnum {
-  dinheiro('Dinheiro'),
-  pix('Pix'),
-  debito('Deb'),
-  credito('Crédito'),
-  ted('Ted');
+  money,
+  pix,
+  debit,
+  credit;
 
-  final String paymentTypeName;
 
-  const PaymentTypeEnum(this.paymentTypeName);
+  const PaymentTypeEnum();
 }

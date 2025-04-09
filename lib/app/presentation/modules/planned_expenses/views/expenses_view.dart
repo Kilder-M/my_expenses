@@ -6,6 +6,7 @@ import 'package:my_expenses/app/presentation/modules/planned_expenses/controller
 import 'package:my_expenses/app/presentation/widgets/expense_card_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/remainder_and_wage_and_amount_card_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/sucess_alert_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class ExpensesView extends GetView<ExpensesController> {
   const ExpensesView({super.key});
@@ -14,16 +15,34 @@ class ExpensesView extends GetView<ExpensesController> {
   Widget build(BuildContext context) {
     PlannedExpensesEntity plannedExpenseArgument = Get.arguments;
     return Scaffold(
-      floatingActionButton: _floatActionButton(plannedExpenseArgument),
+      floatingActionButton:
+          _FloatingActionButton(plannedExpenseArgument: plannedExpenseArgument),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
-      appBar: _appBar(plannedExpenseArgument),
-      body: _body(plannedExpenseArgument),
+      appBar: AppBar(
+        title: Text(
+          DateTimeManagerUtil.getYearAndMonth(
+            plannedExpenseArgument.month,
+          ),
+        ),
+      ),
+      body: _Body(
+        controller: controller,
+        plannedExpenseArgument: plannedExpenseArgument,
+      ),
     );
   }
+}
 
-  FloatingActionButton _floatActionButton(
-      PlannedExpensesEntity plannedExpenseArgument) {
+class _FloatingActionButton extends StatelessWidget {
+  const _FloatingActionButton({
+    required this.plannedExpenseArgument,
+  });
+
+  final PlannedExpensesEntity plannedExpenseArgument;
+
+  @override
+  Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
         Get.toNamed('/expense-form', arguments: [plannedExpenseArgument, null]);
@@ -32,71 +51,55 @@ class ExpensesView extends GetView<ExpensesController> {
       child: const Icon(Icons.add),
     );
   }
+}
 
-  AppBar _appBar(PlannedExpensesEntity plannedExpenseArgument) {
-    return AppBar(
-      title: Text(
-        DateTimeManagerUtil.getYearAndMonth(
-          plannedExpenseArgument.month,
-        ),
-      ),
-    );
-  }
+class _Body extends StatelessWidget {
+  const _Body({
+    required this.controller,
+    required this.plannedExpenseArgument,
+  });
 
-  Widget _body(PlannedExpensesEntity plannedExpenseArgument) {
+  final ExpensesController controller;
+  final PlannedExpensesEntity plannedExpenseArgument;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _remainderAndWageAndAmountCardWidgetRow(plannedExpenseArgument),
-        _subtitle(),
-        _expenseList(plannedExpenseArgument),
+        _RemainderAndWageAmountCardWidgetRow(
+          controller: controller,
+          plannedExpenseArgument: plannedExpenseArgument,
+        ),
+        _Subtitle(
+          controller: controller,
+        ),
+        _ExpensesList(
+          controller: controller,
+          plannedExpenseArgument: plannedExpenseArgument,
+        ),
       ],
     );
   }
+}
 
-  Widget _remainderAndWageAndAmountCardWidgetRow(
-      PlannedExpensesEntity plannedExpenseArgument) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      controller: ScrollController(initialScrollOffset: 80),
-      child: Obx(
-        () => Row(
-          children: [
-            RemainderAndWageAndAmountCardWidget(
-              backgroundColor: Colors.green,
-              icon: Icons.arrow_circle_up_rounded,
-              cardTitle: 'Ganho mensal',
-              cardValue: plannedExpenseArgument.wage,
-            ),
-            RemainderAndWageAndAmountCardWidget(
-              backgroundColor: Colors.orange,
-              icon: Icons.arrow_circle_down_rounded,
-              cardTitle: 'Despesas',
-              cardValue: plannedExpenseArgument
-                  .calculateAmount(controller.expensesList),
-            ),
-            RemainderAndWageAndAmountCardWidget(
-              backgroundColor: Colors.deepPurple,
-              icon: Icons.align_vertical_bottom_rounded,
-              cardTitle: 'Sobra',
-              cardValue: plannedExpenseArgument
-                  .calculateRemainder(controller.expensesList),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+class _Subtitle extends StatelessWidget {
+  const _Subtitle({
+    required this.controller,
+  });
 
-  Widget _subtitle() {
+  final ExpensesController controller;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Lista de Gastos',
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.expenses_list,
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
@@ -124,8 +127,19 @@ class ExpensesView extends GetView<ExpensesController> {
       ),
     );
   }
+}
 
-  Widget _expenseList(PlannedExpensesEntity plannedExpenseArgument) {
+class _ExpensesList extends StatelessWidget {
+  const _ExpensesList({
+    required this.controller,
+    required this.plannedExpenseArgument,
+  });
+
+  final ExpensesController controller;
+  final PlannedExpensesEntity plannedExpenseArgument;
+
+  @override
+  Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -174,23 +188,72 @@ class ExpensesView extends GetView<ExpensesController> {
                                 await controller.deleteExpenseUseCase(expense);
                                 await controller.getExpenseListById(
                                     plannedExpenseArgument.id!);
-                                showDialog(
-                                  context: context,
-                                  builder: ((context) => const SucessAlert(
-                                        title: 'Deletado com sucesso!',
-                                      )),
-                                );
+                                if (context.mounted) {
+                                  showDialog(
+                                    context: context,
+                                    builder: ((context) => SucessAlert(
+                                          title: AppLocalizations.of(context)!
+                                              .deleted_successfully,
+                                        )),
+                                  );
+                                }
                               },
                             ),
                           );
                         }),
                       )
-                    : const Center(
-                        child: Text('A lista está vazia'),
+                    : Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.the_list_is_empty,
+                        ),
                       ),
               );
             }
           }),
+        ),
+      ),
+    );
+  }
+}
+
+class _RemainderAndWageAmountCardWidgetRow extends StatelessWidget {
+  const _RemainderAndWageAmountCardWidgetRow({
+    required this.controller,
+    required this.plannedExpenseArgument,
+  });
+
+  final ExpensesController controller;
+  final PlannedExpensesEntity plannedExpenseArgument;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      controller: ScrollController(initialScrollOffset: 80),
+      child: Obx(
+        () => Row(
+          children: [
+            RemainderAndWageAndAmountCardWidget(
+              backgroundColor: Colors.green,
+              icon: Icons.arrow_circle_up_rounded,
+              cardTitle: AppLocalizations.of(context)!.monthly_earning,
+              cardValue: plannedExpenseArgument.wage,
+            ),
+            RemainderAndWageAndAmountCardWidget(
+              backgroundColor: Colors.orange,
+              icon: Icons.arrow_circle_down_rounded,
+              cardTitle: AppLocalizations.of(context)!.expenses,
+              cardValue: plannedExpenseArgument
+                  .calculateAmount(controller.expensesList),
+            ),
+            RemainderAndWageAndAmountCardWidget(
+              backgroundColor: Colors.deepPurple,
+              icon: Icons.align_vertical_bottom_rounded,
+              cardTitle: AppLocalizations.of(context)!.remainder,
+              cardValue: plannedExpenseArgument
+                  .calculateRemainder(controller.expensesList),
+            ),
+          ],
         ),
       ),
     );

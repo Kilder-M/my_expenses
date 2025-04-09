@@ -1,0 +1,243 @@
+{
+    "language" : "english",
+    "@language" : {
+        "description": " The current language"
+    },
+    "language_text" : "Language",
+    "@language_text" : {
+        "description": " Language text"
+    },
+    "workout": "Workout",
+    "@workout": {
+        "description": "Workout text"
+    },
+    "new_workout": "New Workout",
+    "@new_workout": {
+        "description": "Workout new text"
+    },
+    "home" : "Home",
+    "@home": {
+        "description": "Home text"
+    },
+    "profile" : "Profile",
+    "@profile": {
+        "description": "profile text"
+    },
+    "settings" : "Settings",
+    "@settings": {
+        "description": "settings text"
+    },
+     "monday" : "Monday",
+    "@monday": {
+        "description": "week day"
+    },
+     "tuesday" : "Tuesday",
+    "@tuesday": {
+        "description": "week day"
+    },
+     "wednesday" : "Wednesday",
+    "@wednesday": {
+        "description": "week day"
+    },
+     "thurday" : "Thursday",
+    "@thurday": {
+        "description": "week day"
+    },
+     "friday" : "Friday",
+    "@friday": {
+        "description": "week day"
+    },
+     "saturday" : "Saturday",
+    "@saturday": {
+        "description": "week day"
+    },
+     "sunday" : "Sunday",
+    "@sunday": {
+        "description": "settings text"
+    },
+    "sets" : "Sets",
+    "@sets": {
+        "description": "Sets text"
+    },
+    "reps" : "Reps",
+    "@reps": {
+        "description": "Reps text"
+    },
+    "rest_time" : "Rest time",
+    "@rest_time": {
+        "description": "Rest time text"
+    },
+    "name" : "Name",
+    "@name": {
+        "description": "Name text"
+    },
+    "weight" : "Weight",
+    "@weight": {
+        "description": "weight text"
+    },
+    "observations" : "Observations",
+    "@observations": {
+        "description": "observations text"
+    },
+    "save" : "Save",
+    "@save": {
+        "description": "save text"
+    },
+    "picture": "Picture",
+    "@picture": {
+        "description": "picture text"
+    },
+    "machine": "Machine",
+    "@machine": {
+        "description": "machine text"
+    },
+     "delete": "Delete",
+    "@delete": {
+        "description": "delete text"
+    },
+    "edit": "Edit",
+    "@edit": {
+        "description": "edit text"
+    },
+    "what_would_you_like_to_do": "What would you like to do ?",
+    "@what_would_you_like_to_do": {
+        "description": "What would you like to do ? text"
+    },
+    "dark_mode": "Dark Mode",
+    "@dark_mode": {
+        "description": "Dark mode text"
+    },
+    "required": "Required",
+    "@required": {
+        "description": "required text"
+    },
+    "invalid": "Invalid",
+    "@invalid": {
+        "description": "Invalid text"
+    },
+    "max_length_erro_text": "Max length is",
+    "@max_length_erro_text": {
+        "description": "Max length erro text"
+    },
+    "empty": "Empty",
+    "@empty": {
+        "description": "Empty text"
+    },
+    "manage_your": "Manage Your",
+    "@manage_your": {
+        "description": "Manage Your text"
+    },
+    "finances": "Finances",
+    "@finances": {
+        "description": "Manage Your text"
+    },
+    "monthly_expenses": "Monthly Expenses",
+    "@monthly_expenses": {
+        "description": "Monthly Expenses text"
+    },
+     "tools": "Tools",
+    "@tools": {
+        "description": "tools text"
+    },
+    "profile": "Profile",
+    "@profile": {
+        "description": "profile text"
+    },
+    "home": "Home",
+    "@home": {
+        "description": "home text"
+    },
+    "no": "No",
+    "@no": {
+        "description": "No text"
+    },
+    "do_you_want_to_delete": "Do you want to delete?",
+    "@do_you_want_to_delete": {
+        "description": "Do you want to delete text"
+    },
+    "monthly_expenses_was_deleted_successfully": "Monthly expenses was deleted successfully",
+    "@monthly_expenses_was_deleted_successfully": {
+        "description": "Monthly expenses was deleted successfully text"
+    },
+    "yes": "Yes",
+    "@yes": {
+        "description": "yes text"
+    },
+    "in_progress": "In Progress",
+    "@in_progress": {
+        "description": "In Progress text"
+    },
+    "the_list_is_empty": "The list is empty",
+    "@the_list_is_empty": {
+        "description": "The list is empty text"
+    },
+    "new_monthly_expenses": "New monthly expenses",
+    "@new_monthly_expenses": {
+        "description": "New monthly expenses text"
+    },
+    "saved_successfully": "Saved successfully!",
+    "@saved_successfully": {
+        "description": "Saved successfully text"
+    },
+    "edited_successfully": "Edited successfully!",
+    "@edited_successfully": {
+        "description": "Edited successfully text"
+    },
+    "deleted_successfully": "Deleted successfully!",
+    "@deleted_successfully": {
+        "description": "deleted successfully text"
+    },
+    "monthly_earning": "Monthly earning",
+    "@monthly_earning": {
+        "description": "Monthly earning text"
+    },
+    "expenses_list": "Expenses list",
+    "@expenses_list": {
+        "description": "Expenses list text"
+    },
+    "new_expense": "New Expense",
+    "@new_expense": {
+        "description": "New Expense text"
+    },
+    "editing_expense": "Editing expense",
+    "@editing_expense": {
+        "description": "Editing expense text"
+    },
+     "payment_type": "Payment type",
+    "@payment_type": {
+        "description": "Editing expense text"
+    },
+     "value": "Value",
+    "@value": {
+        "description": "Value text"
+    },
+     "expenses": "Expenses",
+    "@expenses": {
+        "description": "expenses text"
+    },
+    "remainder": "Remainder",
+    "@remainder": {
+        "description": "remainder text"
+    },
+    "debit": "Debit",
+    "@debit": {
+        "description": "debit text"
+    },
+    "money": "Money",
+    "@money": {
+        "description": "Money text"
+    },
+    "pix": "Pix",
+    "@pix": {
+        "description": "pix text"
+    },
+    "credit": "Credit",
+    "@credit": {
+        "description": "credit text"
+    },
+    "date": "Date",
+    "@date": {
+        "description": "Date text"
+    }
+   
+}
