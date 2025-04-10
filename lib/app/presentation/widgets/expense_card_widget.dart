@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_expenses/app/core/utils/currency_format_manager_util.dart';
 
 class ExpenseCardWidget extends StatelessWidget {
-  final String title, subtitle, paymentForm;
+  final String title;
+  final String subtitle;
+  final String paymentForm;
   final double value;
   final IconData statusIcon;
   final Color iconColor;
@@ -22,7 +24,9 @@ class ExpenseCardWidget extends StatelessWidget {
     required this.paymentForm,
     this.onTap,
     this.switchOnChanged,
-    required this.switchValue, required this.dismissibleKey, this.onDismissed,
+    required this.switchValue,
+    required this.dismissibleKey,
+    this.onDismissed,
   });
 
   @override
@@ -38,41 +42,51 @@ class ExpenseCardWidget extends StatelessWidget {
         shadowColor: Colors.deepPurple,
         margin: const EdgeInsets.all(2),
         child: ListTile(
-          subtitle: subtitleStatus(),
-          leading: leadingIcon(),
+          subtitle: Text(subtitle),
+          leading: const _LeadingIcon(),
           onTap: onTap,
           minLeadingWidth: 20,
-          trailing: trailingColumn(),
+          trailing: _TrailingColumn(
+              switchValue: switchValue,
+              switchOnChanged: switchOnChanged,
+              value: value),
           title: Text(title),
         ),
       ),
     );
   }
+}
 
-  Column trailingColumn() {
+class _TrailingColumn extends StatelessWidget {
+  const _TrailingColumn({
+    required this.switchValue,
+    required this.switchOnChanged,
+    required this.value,
+  });
+
+  final bool switchValue;
+  final void Function(bool p1)? switchOnChanged;
+  final double value;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [trailingSwitch(), valueField()],
+      children: [
+        _TrailingSwitch(
+            switchValue: switchValue, switchOnChanged: switchOnChanged),
+        _ValueField(value: value)
+      ],
     );
   }
+}
 
-  Widget trailingSwitch() {
-    return SizedBox(
-        height: 20,
-        width: 50,
-        child: Switch(
-          value: switchValue,
-          activeColor: Colors.green,
-          onChanged: switchOnChanged,
-        ));
-  }
+class _LeadingIcon extends StatelessWidget {
+  const _LeadingIcon();
 
-  Widget subtitleStatus() {
-    return Text(subtitle);
-  }
-
-  CircleAvatar leadingIcon() {
+  @override
+  Widget build(BuildContext context) {
     return const CircleAvatar(
       backgroundColor: Colors.white,
       child: Icon(
@@ -82,8 +96,17 @@ class ExpenseCardWidget extends StatelessWidget {
       ),
     );
   }
+}
 
-  Padding valueField() {
+class _ValueField extends StatelessWidget {
+  const _ValueField({
+    required this.value,
+  });
+
+  final double value;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 4.0),
       child: Text(
@@ -93,6 +116,29 @@ class ExpenseCardWidget extends StatelessWidget {
           fontSize: 15,
         ),
         textDirection: TextDirection.rtl,
+      ),
+    );
+  }
+}
+
+class _TrailingSwitch extends StatelessWidget {
+  const _TrailingSwitch({
+    required this.switchValue,
+    required this.switchOnChanged,
+  });
+
+  final bool switchValue;
+  final void Function(bool value)? switchOnChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 20,
+      width: 50,
+      child: Switch(
+        value: switchValue,
+        activeColor: Colors.green,
+        onChanged: switchOnChanged,
       ),
     );
   }
