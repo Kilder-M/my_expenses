@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
-  final double? width, height;
+  final double? width;
+  final double? height;
+  final int? maxLength;
   final String labelText;
   final String? initialValue;
   final bool? enable, showCursor;
@@ -17,6 +19,7 @@ class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget({
     super.key,
     this.textFormFieldController,
+    this.maxLength,
     this.textInputType,
     required this.labelText,
     this.width,
@@ -45,6 +48,8 @@ class TextFormFieldWidget extends StatelessWidget {
           readOnly: readOnly,
           enabled: enable,
           onTap: onTap,
+          maxLength: maxLength,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
           inputFormatters: inputFormatters,
           showCursor: showCursor,
           cursorColor: Colors.deepPurple,

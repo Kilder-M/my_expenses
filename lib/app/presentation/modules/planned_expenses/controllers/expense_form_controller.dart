@@ -1,7 +1,6 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:my_expenses/app/core/enums/payment_type_enum.dart';
 import 'package:my_expenses/app/domain/entities/expense_entity.dart';
 import 'package:my_expenses/app/domain/usecases/save_expense_usecase/save_expense_usecase.dart';
@@ -13,6 +12,8 @@ class ExpenseFormController extends GetxController {
   final _saveExpanseUsecase = Get.find<SaveExpenseUsecase>();
   final _expenseController = Get.find<ExpensesController>();
   final _updateExpense = Get.find<UpdateExpenseUsecase>();
+
+  Locale? deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
 
   ExpenseEntity expenseEntity = ExpenseEntity(
     plannedExpensesId: 0,
@@ -39,12 +40,8 @@ class ExpenseFormController extends GetxController {
     await _expenseController.getExpenseListById(plannedExpenseId);
   }
 
-  CurrencyTextInputFormatter currecyFormat = CurrencyTextInputFormatter(
-    NumberFormat.compactCurrency(
-      locale: 'pt',
-      symbol: 'R\$',
-    ),
-  );
+  CurrencyTextInputFormatter currecyFormat =
+      CurrencyTextInputFormatter.currency(maxValue: 10000000000000,);
 
   String getPaymentTypeName(
       BuildContext context, PaymentTypeEnum paymentTypeEnum) {
