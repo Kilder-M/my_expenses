@@ -12,14 +12,12 @@ class ExpenseFormView extends GetView<ExpenseFormController> {
 
   @override
   Widget build(BuildContext context) {
-    PlannedExpensesEntity plannedExpensesArgument = Get.arguments[0];
-    controller.expenseEntity = Get.arguments[1] ?? controller.expenseEntity;
 
     return Scaffold(
       floatingActionButton: _FloatActionButton(
         controller: controller,
         context: context,
-        plannedExpenseArgument: plannedExpensesArgument,
+        plannedExpenseArgument: controller.plannedExpensesArgument,
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,

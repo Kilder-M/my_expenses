@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_expenses/app/core/enums/payment_type_enum.dart';
 import 'package:my_expenses/app/domain/entities/expense_entity.dart';
+import 'package:my_expenses/app/domain/entities/planned_expenses_entity.dart';
 import 'package:my_expenses/app/domain/usecases/save_expense_usecase/save_expense_usecase.dart';
 import 'package:my_expenses/app/domain/usecases/update_expense_usecase/update_expense_usecase.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/expenses_controller.dart';
@@ -12,6 +13,12 @@ class ExpenseFormController extends GetxController {
   final _saveExpanseUsecase = Get.find<SaveExpenseUsecase>();
   final _expenseController = Get.find<ExpensesController>();
   final _updateExpense = Get.find<UpdateExpenseUsecase>();
+
+  PlannedExpensesEntity plannedExpensesArgument = Get.arguments[0];
+
+  ExpenseFormController() {
+    expenseEntity = Get.arguments[1] ?? expenseEntity;
+  }
 
   Locale? deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
 
@@ -41,7 +48,9 @@ class ExpenseFormController extends GetxController {
   }
 
   CurrencyTextInputFormatter currecyFormat =
-      CurrencyTextInputFormatter.currency(maxValue: 10000000000000,);
+      CurrencyTextInputFormatter.currency(
+    maxValue: 10000000000000,
+  );
 
   String getPaymentTypeName(
       BuildContext context, PaymentTypeEnum paymentTypeEnum) {

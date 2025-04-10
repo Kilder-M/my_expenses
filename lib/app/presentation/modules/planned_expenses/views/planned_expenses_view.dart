@@ -93,7 +93,8 @@ class _ListViewBuilder extends StatelessWidget {
                       context: context,
                       builder: ((context) => AlertDialog(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25)),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
                             title: Text(AppLocalizations.of(context)!
                                 .do_you_want_to_delete),
                             actions: [

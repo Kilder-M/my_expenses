@@ -13,22 +13,21 @@ class ExpensesView extends GetView<ExpensesController> {
 
   @override
   Widget build(BuildContext context) {
-    PlannedExpensesEntity plannedExpenseArgument = Get.arguments;
     return Scaffold(
-      floatingActionButton:
-          _FloatingActionButton(plannedExpenseArgument: plannedExpenseArgument),
+      floatingActionButton: _FloatingActionButton(
+          plannedExpenseArgument: controller.plannedExpenseArgument),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       appBar: AppBar(
         title: Text(
           DateTimeManagerUtil.getYearAndMonth(
-            plannedExpenseArgument.month,
+            controller.plannedExpenseArgument.month,
           ),
         ),
       ),
       body: _Body(
         controller: controller,
-        plannedExpenseArgument: plannedExpenseArgument,
+        plannedExpenseArgument: controller.plannedExpenseArgument,
       ),
     );
   }
