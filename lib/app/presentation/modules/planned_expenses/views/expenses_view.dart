@@ -2,33 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_expenses/app/core/utils/date_time_manager_util.dart';
 import 'package:my_expenses/app/domain/entities/planned_expenses_entity.dart';
+import 'package:my_expenses/app/presentation/base/base_views/me_base_view.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/expenses_controller.dart';
 import 'package:my_expenses/app/presentation/widgets/expense_card_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/remainder_and_wage_and_amount_card_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/sucess_alert_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
-class ExpensesView extends GetView<ExpensesController> {
+class ExpensesView extends MEBaseView<ExpensesController> {
   const ExpensesView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    PlannedExpensesEntity plannedExpenseArgument = Get.arguments;
     return Scaffold(
-      floatingActionButton:
-          _FloatingActionButton(plannedExpenseArgument: plannedExpenseArgument),
+      floatingActionButton: _FloatingActionButton(
+          plannedExpenseArgument: controller.plannedExpenseArgument),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
       appBar: AppBar(
         title: Text(
           DateTimeManagerUtil.getYearAndMonth(
-            plannedExpenseArgument.month,
+            controller.plannedExpenseArgument.month,
           ),
         ),
       ),
       body: _Body(
         controller: controller,
-        plannedExpenseArgument: plannedExpenseArgument,
+        plannedExpenseArgument: controller.plannedExpenseArgument,
       ),
     );
   }

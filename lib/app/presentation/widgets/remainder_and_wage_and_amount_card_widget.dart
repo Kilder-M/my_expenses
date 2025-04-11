@@ -20,9 +20,8 @@ class RemainderAndWageAndAmountCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 120,
-      width: 160,
+      width: 200,
       child: Card(
-        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -33,45 +32,74 @@ class RemainderAndWageAndAmountCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              cardTitleRow(),
-              cardValueMethod(),
+              _CardTitleRow(
+                icon: icon,
+                cardTitle: cardTitle,
+                cardValueColor: cardValueColor,
+              ),
+              _CardValueMethod(cardValue: cardValue),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  SizedBox cardValueMethod() {
-    return SizedBox(
-      width: double.infinity,
-      child: Text(
-        CurrencyFormatManagerUtil.getCurrencyFormat(cardValue),
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: const TextStyle(
-          fontSize: 18,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+class _CardValueMethod extends StatelessWidget {
+  const _CardValueMethod({
+    required this.cardValue,
+  });
+
+  final double cardValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return Tooltip(
+      message: CurrencyFormatManagerUtil.getCurrencyFormat(cardValue),
+      child: SizedBox(
+        width: double.infinity,
+        child: Text(
+          CurrencyFormatManagerUtil.getCurrencyFormat(cardValue),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+            fontSize: 16,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
   }
+}
 
-  Row cardTitleRow() {
+class _CardTitleRow extends StatelessWidget {
+  const _CardTitleRow({
+    required this.icon,
+    required this.cardTitle,
+    required this.cardValueColor,
+  });
+
+  final IconData icon;
+  final String cardTitle;
+  final Color? cardValueColor;
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 4),
           child: Icon(
             icon,
-            size: 14,
+            size: 16,
             color: Colors.white,
           ),
         ),
         Text(
           cardTitle,
-          style:  TextStyle(
+          style: TextStyle(
             fontSize: 14,
             color: cardValueColor ?? Colors.white,
           ),

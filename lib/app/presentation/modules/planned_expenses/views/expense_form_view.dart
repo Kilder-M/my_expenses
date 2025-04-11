@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_expenses/app/domain/entities/planned_expenses_entity.dart';
+import 'package:my_expenses/app/presentation/base/base_views/me_base_view.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/expense_form_controller.dart';
 import 'package:my_expenses/app/presentation/widgets/drop_down_form_field_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/sucess_alert_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/text_form_field_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
-class ExpenseFormView extends GetView<ExpenseFormController> {
+class ExpenseFormView extends MEBaseView<ExpenseFormController> {
   const ExpenseFormView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    PlannedExpensesEntity plannedExpensesArgument = Get.arguments[0];
-    controller.expenseEntity = Get.arguments[1] ?? controller.expenseEntity;
-
     return Scaffold(
       floatingActionButton: _FloatActionButton(
         controller: controller,
         context: context,
-        plannedExpenseArgument: plannedExpensesArgument,
+        plannedExpenseArgument: controller.plannedExpensesArgument,
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterFloat,
@@ -79,7 +77,9 @@ class _DropDownButtonFormField extends StatelessWidget {
           .map(
             (e) => DropdownMenuItem<String>(
               value: controller.getPaymentTypeName(context, e),
-              child: Text(controller.getPaymentTypeName(context, e),),
+              child: Text(
+                controller.getPaymentTypeName(context, e),
+              ),
             ),
           )
           .toList(),
@@ -97,7 +97,9 @@ class _ValueTextFormFIeld extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormFieldWidget(
-      initialValue: controller.expenseEntity.value.toString(),
+      initialValue: controller.expenseEntity.id != null
+          ? controller.expenseEntity.value.toString()
+          : null,
       labelText: AppLocalizations.of(context)!.value,
       textInputType: TextInputType.number,
       inputFormatters: [controller.currecyFormat],

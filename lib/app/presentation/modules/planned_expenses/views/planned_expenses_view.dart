@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_expenses/app/core/utils/date_time_manager_util.dart';
+import 'package:my_expenses/app/presentation/base/base_views/me_base_view.dart';
 import 'package:my_expenses/app/presentation/widgets/planned_expenses_card_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/sucess_alert_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 import '../controllers/planned_expenses_controller.dart';
 
-class PlannedExpensesView extends GetView<PlannedExpensesController> {
+class PlannedExpensesView extends MEBaseView<PlannedExpensesController> {
   const PlannedExpensesView({super.key});
 
   @override
@@ -93,7 +94,8 @@ class _ListViewBuilder extends StatelessWidget {
                       context: context,
                       builder: ((context) => AlertDialog(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25)),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
                             title: Text(AppLocalizations.of(context)!
                                 .do_you_want_to_delete),
                             actions: [
