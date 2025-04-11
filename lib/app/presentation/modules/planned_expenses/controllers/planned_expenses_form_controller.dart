@@ -7,10 +7,15 @@ import 'package:my_expenses/app/presentation/base/base_controllers/me_base_contr
 import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/planned_expenses_controller.dart';
 
 class PlannedExpensesFormController extends MeBaseController {
+
+  //usecases instances
   final _savePlannedExpensesUsecase = Get.find<SavePlannedExpensesUseCase>();
   final _plannedExpensesController = Get.find<PlannedExpensesController>();
   final dateTextFormFieldController = TextEditingController();
   final valueTextFormFieldController = TextEditingController();
+  //usecases instances
+
+
   CurrencyTextInputFormatter currecyFormat =
       CurrencyTextInputFormatter.currency(
     maxValue: 10000000000000,
