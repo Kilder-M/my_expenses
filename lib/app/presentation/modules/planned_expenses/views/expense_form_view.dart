@@ -12,7 +12,6 @@ class ExpenseFormView extends GetView<ExpenseFormController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       floatingActionButton: _FloatActionButton(
         controller: controller,
@@ -77,7 +76,9 @@ class _DropDownButtonFormField extends StatelessWidget {
           .map(
             (e) => DropdownMenuItem<String>(
               value: controller.getPaymentTypeName(context, e),
-              child: Text(controller.getPaymentTypeName(context, e),),
+              child: Text(
+                controller.getPaymentTypeName(context, e),
+              ),
             ),
           )
           .toList(),
@@ -95,7 +96,9 @@ class _ValueTextFormFIeld extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormFieldWidget(
-      initialValue: controller.expenseEntity.value.toString(),
+      initialValue: controller.expenseEntity.id != null
+          ? controller.expenseEntity.value.toString()
+          : null,
       labelText: AppLocalizations.of(context)!.value,
       textInputType: TextInputType.number,
       inputFormatters: [controller.currecyFormat],
