@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_expenses/app/core/utils/show_date_picker_util.dart';
+import 'package:my_expenses/app/presentation/base/base_views/me_base_view.dart';
 import 'package:my_expenses/app/presentation/modules/planned_expenses/controllers/planned_expenses_form_controller.dart';
 import 'package:my_expenses/app/presentation/widgets/sucess_alert_widget.dart';
 import 'package:my_expenses/app/presentation/widgets/text_form_field_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
-class PlannedExpensesFormView extends GetView<PlannedExpensesFormController> {
+class PlannedExpensesFormView extends MEBaseView<PlannedExpensesFormController> {
   const PlannedExpensesFormView({
     super.key,
   });

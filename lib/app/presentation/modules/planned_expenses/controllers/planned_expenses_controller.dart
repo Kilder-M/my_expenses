@@ -3,8 +3,9 @@ import 'package:my_expenses/app/domain/entities/planned_expenses_entity.dart';
 import 'package:my_expenses/app/domain/usecases/delete_expense_usecase/delete_planned_expenses_usecase/delete_planned_expenses_usecase.dart';
 import 'package:my_expenses/app/domain/usecases/get_planned_expenses_usecase/get_planned_expenses_list_usecase.dart';
 import 'package:my_expenses/app/domain/usecases/save_planned_expenses_usecase/save_planned_expense_usecase.dart';
+import 'package:my_expenses/app/presentation/base/base_controllers/me_base_controller.dart';
 
-class PlannedExpensesController extends GetxController {
+class PlannedExpensesController extends MeBaseController {
   final _savePlannedExpensesUsecase = Get.find<SavePlannedExpensesUseCase>();
   final _deletePlannedExpensesUsecase =
       Get.find<DeletePlannedExpensesUsecase>();

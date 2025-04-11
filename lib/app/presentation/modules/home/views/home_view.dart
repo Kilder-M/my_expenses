@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_expenses/app/presentation/base/base_views/me_base_view.dart';
 import 'package:my_expenses/app/presentation/widgets/grid_view_card_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import '../controllers/home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
+class HomeView extends MEBaseView<HomeController> {
   const HomeView({super.key});
 
   @override
